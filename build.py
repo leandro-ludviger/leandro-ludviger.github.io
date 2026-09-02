@@ -91,6 +91,10 @@ def bloco_seo(titulo, desc, url, og, noindex=False):
         f'<meta name="description" content="{d}">',
         f'<link rel="canonical" href="{url}">',
         f'<meta name="author" content="{AUTOR}">',
+        # o .ico atende navegador antigo; o .svg troca de cor com o tema do sistema
+        '<link rel="icon" href="/favicon.ico" sizes="32x32">',
+        '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
+        '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
         '<meta property="og:type" content="website">',
         '<meta property="og:site_name" content="Leandro Ludviger">',
         f'<meta property="og:title" content="{t}">',

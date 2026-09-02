@@ -27,6 +27,10 @@ assets/               imagens, vídeos e fontes
   mb/                 Mercado Bitcoin
   meridian/           Meridian
   og/                 imagens de prévia de link (LinkedIn, WhatsApp)
+  favicon/            a arte original do ícone, em SVG
+favicon.svg           ícone da aba — troca de cor com o tema do sistema
+favicon.ico           ícone para navegador antigo (16, 32 e 48px)
+apple-touch-icon.png  ícone de quando salvam o site na tela do iPhone
 projetos/             gerado automaticamente — não edite à mão
 sitemap.xml           gerado automaticamente
 robots.txt            gerado automaticamente
