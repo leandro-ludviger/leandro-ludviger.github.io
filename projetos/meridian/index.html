@@ -267,6 +267,14 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
   html, body { margin: 0; height: 100%; background: #0A0A09; }
   a { color: inherit; text-decoration: none; }
   a:hover { filter: brightness(1.25); }
+  /* o preenchimento automatico do navegador pinta o campo de branco;
+     a transicao longa impede essa cor de aparecer */
+  input:-webkit-autofill, input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus, input:-webkit-autofill:active {
+    -webkit-text-fill-color: currentColor;
+    caret-color: currentColor;
+    transition: background-color 100000s ease-in-out 0s;
+  }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: translateY(0); } }
   @keyframes dgFlow { from { stroke-dashoffset: 112; } to { stroke-dashoffset: 0; } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -296,7 +304,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
 <!-- ================= HEADER GLOBAL (fixo) ================= -->
 <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: flex-start; justify-content: space-between; padding: {{ navPad }}; color: {{ th.text }}; pointer-events: none; font-family: 'Archivo', sans-serif;">
-  <a href="#" onclick="{{ goHome }}" onmouseenter="{{ logoEnter }}" onmouseleave="{{ logoLeave }}" style="pointer-events: auto; background: {{ th.panel }}; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 10px; padding: {{ logoPad }}; height: {{ btnH }}; box-sizing: border-box; font-weight: 600; font-size: {{ btnFs }}; letter-spacing: 1.5px; transform: {{ logoTx }}; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); display: flex; align-items: center; white-space: nowrap;" style-hover="opacity: 1;"><span>L</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">EANDRO</span><span style="margin-left: 7px;">L</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">UDVIGER</span><span style="margin-left: 7px;">R</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">AUCCI</span><span style="margin-left: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.5625rem; letter-spacing: 0.0938rem; text-transform: uppercase; color: {{ th.subtext }}; border: 1px solid {{ th.subtext }}; border-radius: 100px; padding: 0.1875rem 0.5rem;">wip</span></a>
+  <a href="#" onclick="{{ goHome }}" onmouseenter="{{ logoEnter }}" onmouseleave="{{ logoLeave }}" style="pointer-events: auto; background: {{ th.panel }}; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 10px; padding: {{ logoPad }}; height: {{ btnH }}; box-sizing: border-box; font-weight: 600; font-size: {{ btnFs }}; letter-spacing: 1.5px; transform: {{ logoTx }}; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); display: flex; align-items: center; white-space: nowrap;" style-hover="opacity: 1;"><span>L</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">EANDRO</span><span style="margin-left: 7px;">L</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">UDVIGER</span><span style="margin-left: 7px;">R</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">AUCCI</span></a>
 
   <div style="display: flex; gap: 0; align-items: center; flex: {{ navGrow }}; justify-content: {{ navJustify }}; pointer-events: {{ navBtnsPE }}; opacity: {{ navBtnsOp }}; transition: opacity 0.6s ease 0.5s;">
     <sc-if value="{{ infoClosed }}" hint-placeholder-val="{{ true }}"><a href="#" onclick="{{ goInfo }}" style="background: {{ th.panel }}; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 10px; padding: {{ btnPadX }}; height: {{ btnH }}; box-sizing: border-box; display: inline-flex; align-items: center; font-size: {{ btnFs }}; transition: background 0.25s;" style-hover="background: {{ th.panelHover }}; opacity: 1;">{{ t.info }}</a></sc-if>
@@ -407,7 +415,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
 <!-- ================= CASE ================= -->
 <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
-<div data-screen-label="Case" ref="{{ caseRootRef }}" onscroll="{{ onCaseScroll }}" style="position: fixed; inset: 0; z-index: 660; background-color: {{ caseRootBg }}; color: {{ th.text }}; transition: background-color 0.35s ease, color 0.35s ease; font-family: 'Archivo', sans-serif; overflow-y: auto; animation: {{ caseAnim }};">
+<div data-screen-label="Case" ref="{{ caseRootRef }}" onscroll="{{ onCaseScroll }}" style="position: fixed; inset: 0; z-index: 660; background-color: {{ caseRootBg }}; color: {{ th.text }}; transition: background-color 0.35s ease, color 0.35s ease; font-family: 'Archivo', sans-serif; overflow-y: {{ caseOverflowY }}; animation: {{ caseAnim }};">
 
   <div style="position: fixed; left: 50%; bottom: 1.75rem; z-index: 680; display: flex; gap: 8px; align-items: center; transform: {{ caseBarT }}; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);">
     <a href="#" onclick="{{ goHome }}" title="{{ t.closeBtn }}" style="width: {{ sqBtnW }}; height: {{ btnH }}; border-radius: 10px; background: {{ th.panel }}; color: {{ th.text }}; display: flex; align-items: center; justify-content: center; font-size: 15px; backdrop-filter: blur(0.75rem); box-shadow: {{ caseBarShadow }};">✕</a>
@@ -444,27 +452,23 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </sc-if>
 
     <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
-    <div style="min-height: 76vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.875rem; padding: 3rem 1.5rem; text-align: center;">
-      <h1 style="font-size: {{ caseTitleSize }}; font-weight: 500; letter-spacing: {{ caseTitleSpacing }}; margin: 0;">{{ t.comingSoon }}</h1>
-      <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 300; margin: 0; color: {{ th.subtext }};">{{ t.comingSoonBody }}</p>
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.875rem; margin-top: 2.5rem; width: 100%; max-width: 30rem;">
-        <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
-        <div style="font-size: 0.9375rem; font-weight: 300; color: {{ th.subtext }}; margin: 0;">{{ t.waitLabel }}</div>
-        <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%;">
-          <input ref="{{ waitTrapRef }}" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
-          <input type="email" name="email" value="{{ waitEmail }}" onchange="{{ onWaitInput }}" placeholder="{{ t.waitPlaceholder }}" aria-label="{{ t.waitLabel }}" autocomplete="email" spellcheck="{{ false }}" style="flex: 1 1 14rem; min-width: 0; max-width: 20rem; height: 2.75rem; box-sizing: border-box; padding: 0 0.875rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; color: {{ th.text }}; background: {{ th.card }}; border: 1px solid {{ waitFieldBorder }}; border-radius: 10px; outline: none; transition: border-color 0.2s ease;">
-          <button type="submit" disabled="{{ waitBusy }}" style="height: 2.75rem; padding: 0 1.125rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 500; color: {{ th.bg }}; background: {{ th.knob }}; border: none; border-radius: 10px; cursor: {{ waitBtnCursor }}; opacity: {{ waitBtnOp }}; transition: opacity 0.2s ease; white-space: nowrap;">{{ waitBtnLabel }}</button>
-        </form>
-        <sc-if value="{{ waitHasMsg }}" hint-placeholder-val="{{ false }}">
-        <div style="font-size: 0.8125rem; font-weight: 300; color: {{ th.text2 }}; margin: 0;">{{ waitMsg }}</div>
-        </sc-if>
-        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.6875rem; line-height: 1.5; color: {{ th.statement }}; margin: 0;">{{ t.waitPrivacy }}</div>
-        </sc-if>
-        <sc-if value="{{ waitDone }}" hint-placeholder-val="{{ false }}">
-        <div style="font-size: 1rem; font-weight: 300; color: {{ th.text }}; margin: 0;">{{ t.waitOk }}</div>
-        </sc-if>
-      </div>
+    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 7rem 1.5rem 9rem; box-sizing: border-box; text-align: center;">
+      <h1 style="font-family: 'Archivo', sans-serif; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; line-height: 1.4; margin: 0; color: {{ th.text }};">{{ t.comingSoonBody }}</h1>
+      <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
+      <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%; max-width: 30rem;">
+        <input ref="{{ waitTrapRef }}" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
+        <input type="email" name="email" value="{{ waitEmail }}" onchange="{{ onWaitInput }}" placeholder="{{ t.waitPlaceholder }}" aria-label="{{ t.waitLabel }}" autocomplete="email" spellcheck="{{ false }}" style="flex: 1 1 14rem; min-width: 0; max-width: 20rem; height: 2.75rem; box-sizing: border-box; padding: 0 0.875rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; color: {{ th.text }}; background: {{ th.card }}; border: 1px solid {{ waitFieldBorder }}; border-radius: 10px; outline: none; transition: border-color 0.2s ease;">
+        <button type="submit" disabled="{{ waitBusy }}" style="height: 2.75rem; padding: 0 1.125rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 500; color: {{ th.bg }}; background: {{ th.knob }}; border: none; border-radius: 10px; cursor: {{ waitBtnCursor }}; opacity: {{ waitBtnOp }}; transition: opacity 0.2s ease; white-space: nowrap;">{{ waitBtnLabel }}</button>
+      </form>
+      <sc-if value="{{ waitHasMsg }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.text2 }};">{{ waitMsg }}</div>
+      </sc-if>
+      </sc-if>
+      <sc-if value="{{ waitDone }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 300; margin: 0; color: {{ th.text }};">{{ t.waitOk }}</div>
+      </sc-if>
     </div>
+    <div style="position: absolute; left: 0; right: 0; bottom: 5.5rem; padding: 0 1.5rem; text-align: center; font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.statement }};">{{ t.waitPrivacy }}</div>
     </sc-if>
 
     <sc-if value="{{ isGeneric }}" hint-placeholder-val="{{ true }}">
@@ -1392,7 +1396,7 @@ class Component extends DCLogic {
       waitOk: 'Pronto. Aviso você assim que publicar.',
       waitInvalid: 'Confira o e-mail digitado.',
       waitError: 'Não consegui enviar agora. Tente de novo em instantes.',
-      waitPrivacy: 'Uso seu e-mail só para este aviso. Nada mais.',
+      waitPrivacy: 'O seu e-mail será utilizado apenas para este aviso. Nada mais.',
       statement: 'Combino curiosidade, experimentação\ne pensamento sistêmico para desenhar\nsoluções escaláveis.',
       portrait: '[ retrato — arraste sua foto depois ]',
       bio: 'Ao longo da carreira, atuei em diferentes contextos — de startups em estágio inicial a empresas consolidadas. Essa diversidade me ensinou que não existe um processo universal. Existe a capacidade de adaptar métodos, alinhar pessoas e construir soluções que gerem valor para quem as utiliza — e para quem as constrói.',
@@ -1405,7 +1409,7 @@ class Component extends DCLogic {
       waitOk: "Done. I'll let you know when it's published.",
       waitInvalid: 'Please check the email address.',
       waitError: "Couldn't send right now. Please try again in a moment.",
-      waitPrivacy: 'I use your email for this notice only. Nothing else.',
+      waitPrivacy: 'Your email will be used for this notice only. Nothing else.',
       statement: 'I combine curiosity, experimentation\nand systems thinking to design\nscalable solutions.',
       portrait: '[ portrait — drop your photo here later ]',
       bio: 'Throughout my career, I have worked in different contexts — from early-stage startups to established companies. That diversity taught me there is no universal process. There is the ability to adapt methods, align people and build solutions that create value for those who use them — and for those who build them.',
@@ -1623,6 +1627,7 @@ class Component extends DCLogic {
       waitFieldBorder: this.state.waitStatus === 'invalid' ? th.chipBorder : th.cardBorder,
       waitHasMsg: this.state.waitStatus === 'invalid' || this.state.waitStatus === 'error',
       waitMsg: this.state.waitStatus === 'invalid' ? t.waitInvalid : (this.state.waitStatus === 'error' ? t.waitError : ''),
+      caseOverflowY: cases[caseIdx].comingSoon ? 'hidden' : 'auto',
       isComingSoon: !!cases[caseIdx].comingSoon,
       notComingSoon: !cases[caseIdx].comingSoon,
       isGeneric: !cases[caseIdx].isSanctu && !cases[caseIdx].isMB && !cases[caseIdx].isMeridian && !cases[caseIdx].comingSoon,
@@ -1804,7 +1809,9 @@ class Component extends DCLogic {
         const show = e.target.scrollTop > window.innerHeight * 0.8;
         if (show !== this.state.caseBarIn) this.setState({ caseBarIn: show });
       },
-      caseBarT: 'translateX(-50%) translateY(' + (this.state.caseBarIn ? '0rem' : '7.5rem') + ')',
+      // case em construcao nao rola, entao a barra nunca subiria sozinha:
+      // sem ela nao haveria como fechar o case nem ir ao proximo projeto
+      caseBarT: 'translateX(-50%) translateY(' + ((this.state.caseBarIn || cases[caseIdx].comingSoon) ? '0rem' : '7.5rem') + ')',
       caseToTop: (e) => {
         e.preventDefault();
         const root = this.caseRootRef.current;
