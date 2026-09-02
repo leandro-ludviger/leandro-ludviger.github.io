@@ -444,6 +444,23 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <div style="min-height: 76vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.875rem; padding: 3rem 1.5rem; text-align: center;">
       <h1 style="font-size: {{ caseTitleSize }}; font-weight: 500; letter-spacing: {{ caseTitleSpacing }}; margin: 0;">{{ t.comingSoon }}</h1>
       <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 300; margin: 0; color: {{ th.subtext }};">{{ t.comingSoonBody }}</p>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.875rem; margin-top: 2.5rem; width: 100%; max-width: 30rem;">
+        <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
+        <div style="font-size: 0.9375rem; font-weight: 300; color: {{ th.subtext }}; margin: 0;">{{ t.waitLabel }}</div>
+        <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%;">
+          <input ref="{{ waitTrapRef }}" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
+          <input type="email" name="email" value="{{ waitEmail }}" onchange="{{ onWaitInput }}" placeholder="{{ t.waitPlaceholder }}" aria-label="{{ t.waitLabel }}" autocomplete="email" spellcheck="{{ false }}" style="flex: 1 1 14rem; min-width: 0; max-width: 20rem; height: 2.75rem; box-sizing: border-box; padding: 0 0.875rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; color: {{ th.text }}; background: {{ th.card }}; border: 1px solid {{ waitFieldBorder }}; border-radius: 10px; outline: none; transition: border-color 0.2s ease;">
+          <button type="submit" disabled="{{ waitBusy }}" style="height: 2.75rem; padding: 0 1.125rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 500; color: {{ th.bg }}; background: {{ th.knob }}; border: none; border-radius: 10px; cursor: {{ waitBtnCursor }}; opacity: {{ waitBtnOp }}; transition: opacity 0.2s ease; white-space: nowrap;">{{ waitBtnLabel }}</button>
+        </form>
+        <sc-if value="{{ waitHasMsg }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size: 0.8125rem; font-weight: 300; color: {{ th.text2 }}; margin: 0;">{{ waitMsg }}</div>
+        </sc-if>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.6875rem; line-height: 1.5; color: {{ th.statement }}; margin: 0;">{{ t.waitPrivacy }}</div>
+        </sc-if>
+        <sc-if value="{{ waitDone }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size: 1rem; font-weight: 300; color: {{ th.text }}; margin: 0;">{{ t.waitOk }}</div>
+        </sc-if>
+      </div>
     </div>
     </sc-if>
 
@@ -726,7 +743,8 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 </x-dc>
 <script type="text/x-dc" data-dc-script="" data-props="{}">
 class Component extends DCLogic {
-  state = { view: 'home', caseIdx: 0, lang: 'pt', theme: 'dark', logoHover: false, logoIntro: true, infoOpen: false, hoverThumb: null, openSkill: null, inFlight: false, caseEntering: false, caseLeaving: false, caseSlideDir: 0, infoClosing: false, stripHover: null, caseBarIn: false, pinStep: 0, rolePanelOpen: false };
+  state = { view: 'home', caseIdx: 0, lang: 'pt', theme: 'dark', logoHover: false, logoIntro: true, infoOpen: false, hoverThumb: null, openSkill: null, inFlight: false, caseEntering: false, caseLeaving: false, caseSlideDir: 0, infoClosing: false, stripHover: null, caseBarIn: false, pinStep: 0, rolePanelOpen: false, waitEmail: '', waitStatus: 'idle' };
+  waitTrapRef = React.createRef();
   stripRef = React.createRef();
   emailRef = React.createRef();
   cursorRef = React.createRef();
@@ -1016,6 +1034,54 @@ class Component extends DCLogic {
       this.setState({ view: q.view, caseIdx: q.caseIdx, lang: q.lang, infoOpen: false, inFlight: false, caseEntering: false, caseLeaving: false });
     };
     window.addEventListener('popstate', this.onPopState);
+  }
+
+  // --- Aviso por e-mail nos cases em construcao ---
+  WAIT_KEY = '929fdd4a-9933-4f85-a6f7-1afc478ff5d7';
+
+  onWaitInput = (e) => {
+    const v = e.target.value;
+    this.setState({ waitEmail: v, waitStatus: this.state.waitStatus === 'invalid' ? 'idle' : this.state.waitStatus });
+  };
+
+  submitWait = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (this.state.waitStatus === 'sending' || this.state.waitStatus === 'ok') return;
+
+    const email = (this.state.waitEmail || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { this.setState({ waitStatus: 'invalid' }); return; }
+
+    // campo-armadilha: invisivel para gente, preenchido por robo
+    // checkbox: .value devolve 'on' mesmo desmarcado — o que conta e .checked
+    const trap = !!(this.waitTrapRef.current && this.waitTrapRef.current.checked);
+
+    const caso = (this.renderVals && this.state) ? this.caseTitleForWait() : '';
+    this.setState({ waitStatus: 'sending' });
+
+    const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const limite = setTimeout(() => { if (ctrl) ctrl.abort(); }, 15000);
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      signal: ctrl ? ctrl.signal : undefined,
+      body: JSON.stringify({
+        access_key: this.WAIT_KEY,
+        subject: 'Portfolio — avisar quando sair: ' + caso,
+        from_name: 'Portfolio Leandro Ludviger',
+        email: email,
+        message: 'Pediu para ser avisado quando o case "' + caso + '" for publicado.',
+        botcheck: trap
+      })
+    })
+      .then((r) => r.json())
+      .then((d) => { clearTimeout(limite); this.setState({ waitStatus: d && d.success ? 'ok' : 'error' }); })
+      .catch(() => { clearTimeout(limite); this.setState({ waitStatus: 'error' }); });
+  };
+
+  caseTitleForWait() {
+    const nomes = this.routeTitles || [];
+    return nomes[this.state.caseIdx] || '';
   }
 
   componentDidMount() {
@@ -1318,6 +1384,12 @@ class Component extends DCLogic {
 
     const t = pt ? {
       info: 'Mais', infoOpen: 'Menos', langBtn: 'EN', comingSoon: 'Em breve', comingSoonBody: 'Case em construção',
+      waitLabel: 'Quer saber quando este case for publicado?', waitPlaceholder: 'seu@email.com',
+      waitBtn: 'Avise-me', waitSending: 'Enviando…',
+      waitOk: 'Pronto. Aviso você assim que publicar.',
+      waitInvalid: 'Confira o e-mail digitado.',
+      waitError: 'Não consegui enviar agora. Tente de novo em instantes.',
+      waitPrivacy: 'Uso seu e-mail só para este aviso. Nada mais.',
       statement: 'Combino curiosidade, experimentação\ne pensamento sistêmico para desenhar\nsoluções escaláveis.',
       portrait: '[ retrato — arraste sua foto depois ]',
       bio: 'Ao longo da carreira, atuei em diferentes contextos — de startups em estágio inicial a empresas consolidadas. Essa diversidade me ensinou que não existe um processo universal. Existe a capacidade de adaptar métodos, alinhar pessoas e construir soluções que gerem valor para quem as utiliza — e para quem as constrói.',
@@ -1325,6 +1397,12 @@ class Component extends DCLogic {
       imgDetail: '[ detalhe', imgFull: '[ imagem full-bleed ]'
     } : {
       info: 'More', infoOpen: 'Less', langBtn: 'PT', comingSoon: 'Coming soon', comingSoonBody: 'Case study in progress',
+      waitLabel: 'Want to know when this case study goes live?', waitPlaceholder: 'you@email.com',
+      waitBtn: 'Notify me', waitSending: 'Sending…',
+      waitOk: "Done. I'll let you know when it's published.",
+      waitInvalid: 'Please check the email address.',
+      waitError: "Couldn't send right now. Please try again in a moment.",
+      waitPrivacy: 'I use your email for this notice only. Nothing else.',
       statement: 'I combine curiosity, experimentation\nand systems thinking to design\nscalable solutions.',
       portrait: '[ portrait — drop your photo here later ]',
       bio: 'Throughout my career, I have worked in different contexts — from early-stage startups to established companies. That diversity taught me there is no universal process. There is the ability to adapt methods, align people and build solutions that create value for those who use them — and for those who build them.',
@@ -1529,6 +1607,19 @@ class Component extends DCLogic {
       isMeridian: this.state.view === 'case' && !!cases[caseIdx].isMeridian,
       merRef: this.merRef,
       isMB: !!cases[caseIdx].isMB,
+      waitEmail: this.state.waitEmail,
+      onWaitInput: this.onWaitInput,
+      submitWait: this.submitWait,
+      waitTrapRef: this.waitTrapRef,
+      waitBusy: this.state.waitStatus === 'sending',
+      waitDone: this.state.waitStatus === 'ok',
+      waitNotDone: this.state.waitStatus !== 'ok',
+      waitBtnLabel: this.state.waitStatus === 'sending' ? t.waitSending : t.waitBtn,
+      waitBtnOp: this.state.waitStatus === 'sending' ? 0.55 : 1,
+      waitBtnCursor: this.state.waitStatus === 'sending' ? 'default' : 'pointer',
+      waitFieldBorder: this.state.waitStatus === 'invalid' ? th.chipBorder : th.cardBorder,
+      waitHasMsg: this.state.waitStatus === 'invalid' || this.state.waitStatus === 'error',
+      waitMsg: this.state.waitStatus === 'invalid' ? t.waitInvalid : (this.state.waitStatus === 'error' ? t.waitError : ''),
       isComingSoon: !!cases[caseIdx].comingSoon,
       notComingSoon: !cases[caseIdx].comingSoon,
       isGeneric: !cases[caseIdx].isSanctu && !cases[caseIdx].isMB && !cases[caseIdx].isMeridian && !cases[caseIdx].comingSoon,
