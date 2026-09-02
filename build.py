@@ -133,7 +133,8 @@ def caminhos_absolutos(html):
 
 def aplica_seo(html, seo):
     """Insere (ou substitui) o bloco de SEO logo depois do <meta charset>."""
-    html = re.sub(re.escape(INICIO) + r".*?" + re.escape(FIM), "", html, flags=re.S)
+    # o \n? evita que cada geracao deixe uma linha em branco a mais
+    html = re.sub(r"\n?" + re.escape(INICIO) + r".*?" + re.escape(FIM), "", html, flags=re.S)
     ancora = '<meta name="viewport" content="width=device-width, initial-scale=1">'
     if ancora not in html:
         raise SystemExit("Nao achei a meta viewport no index.html — verifique o arquivo.")
