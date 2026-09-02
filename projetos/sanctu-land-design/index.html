@@ -414,12 +414,14 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 <sc-if value="{{ isCase }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="Case" ref="{{ caseRootRef }}" onscroll="{{ onCaseScroll }}" style="position: fixed; inset: 0; z-index: 660; background-color: {{ caseRootBg }}; color: {{ th.text }}; transition: background-color 0.35s ease, color 0.35s ease; font-family: 'Archivo', sans-serif; overflow-y: {{ caseOverflowY }}; animation: {{ caseAnim }};">
 
+  <sc-if value="{{ notComingSoon }}" hint-placeholder-val="{{ true }}">
   <div style="position: fixed; left: 50%; bottom: 1.75rem; z-index: 680; display: flex; gap: 8px; align-items: center; transform: {{ caseBarT }}; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);">
     <a href="#" onclick="{{ goHome }}" title="{{ t.closeBtn }}" style="width: {{ sqBtnW }}; height: {{ btnH }}; border-radius: 10px; background: {{ th.panel }}; color: {{ th.text }}; display: flex; align-items: center; justify-content: center; font-size: 15px; backdrop-filter: blur(0.75rem); box-shadow: {{ caseBarShadow }};">✕</a>
     <a href="#" onclick="{{ toggleRolePanel }}" style="font-size: {{ btnFs }}; color: {{ th.text }}; background: {{ th.panel }}; border-radius: 10px; width: {{ caseBtnW }}; height: {{ btnH }}; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; backdrop-filter: blur(0.75rem); box-shadow: {{ caseBarShadow }};">{{ t.myRole }}</a>
     <a href="#" onclick="{{ nextCase.open }}" style="font-size: {{ btnFs }}; color: {{ th.text }}; background: {{ th.panel }}; border-radius: 10px; width: {{ caseBtnW }}; height: {{ btnH }}; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; backdrop-filter: blur(0.75rem); box-shadow: {{ caseBarShadow }};">{{ t.nextProject }}</a>
     <a href="#" onclick="{{ caseToTop }}" title="{{ t.toTop }}" style="width: {{ sqBtnW }}; height: {{ btnH }}; border-radius: 10px; background: {{ th.panel }}; color: {{ th.text }}; display: flex; align-items: center; justify-content: center; font-size: 16px; backdrop-filter: blur(0.75rem); box-shadow: {{ caseBarShadow }};">↑</a>
   </div>
+  </sc-if>
 
   <div style="position: fixed; right: {{ rolePanelRight }}; bottom: 1.75rem; z-index: 690; width: 26.25rem; max-width: {{ rolePanelMaxW }}; display: flex; flex-direction: column; align-items: flex-end; gap: 0.875rem; transform: {{ rolePanelT }}; opacity: {{ rolePanelOp }}; pointer-events: {{ rolePanelPe }}; transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;">
     <a href="#" onclick="{{ toggleRolePanel }}" style="font-size: {{ btnFs }}; color: {{ th.text }}; background: {{ th.panelGlass }}; backdrop-filter: blur(16px); border-radius: 10px; padding: {{ btnPadX }}; height: {{ btnH }}; display: inline-flex; align-items: center; box-sizing: border-box;">{{ t.closeBtn }}</a>
@@ -449,7 +451,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </sc-if>
 
     <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
-    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 7rem 1.5rem 9rem; box-sizing: border-box; text-align: center;">
+    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 1.5rem; padding: 22vh 1.5rem 3rem; box-sizing: border-box; text-align: center;">
       <h1 style="font-family: 'Archivo', sans-serif; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; line-height: 1.4; margin: 0; color: {{ th.text }};">{{ t.comingSoonBody }}</h1>
       <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
       <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%; max-width: 30rem;">
@@ -457,15 +459,15 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <input type="email" name="email" value="{{ waitEmail }}" onchange="{{ onWaitInput }}" placeholder="{{ t.waitPlaceholder }}" aria-label="{{ t.waitLabel }}" autocomplete="email" spellcheck="{{ false }}" style="flex: 1 1 14rem; min-width: 0; max-width: 20rem; height: 2.75rem; box-sizing: border-box; padding: 0 0.875rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; color: {{ th.text }}; background: {{ th.card }}; border: 1px solid {{ waitFieldBorder }}; border-radius: 10px; outline: none; transition: border-color 0.2s ease;">
         <button type="submit" disabled="{{ waitBusy }}" style="height: 2.75rem; padding: 0 1.125rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 500; color: {{ th.bg }}; background: {{ th.knob }}; border: none; border-radius: 10px; cursor: {{ waitBtnCursor }}; opacity: {{ waitBtnOp }}; transition: opacity 0.2s ease; white-space: nowrap;">{{ waitBtnLabel }}</button>
       </form>
+      </sc-if>
       <sc-if value="{{ waitHasMsg }}" hint-placeholder-val="{{ false }}">
       <div style="font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.text2 }};">{{ waitMsg }}</div>
-      </sc-if>
       </sc-if>
       <sc-if value="{{ waitDone }}" hint-placeholder-val="{{ false }}">
       <div style="font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 300; margin: 0; color: {{ th.text }};">{{ t.waitOk }}</div>
       </sc-if>
+      <div style="font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.statement }};">{{ t.waitPrivacy }}</div>
     </div>
-    <div style="position: absolute; left: 0; right: 0; bottom: 5.5rem; padding: 0 1.5rem; text-align: center; font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.statement }};">{{ t.waitPrivacy }}</div>
     </sc-if>
 
     <sc-if value="{{ isGeneric }}" hint-placeholder-val="{{ true }}">
@@ -1806,9 +1808,7 @@ class Component extends DCLogic {
         const show = e.target.scrollTop > window.innerHeight * 0.8;
         if (show !== this.state.caseBarIn) this.setState({ caseBarIn: show });
       },
-      // case em construcao nao rola, entao a barra nunca subiria sozinha:
-      // sem ela nao haveria como fechar o case nem ir ao proximo projeto
-      caseBarT: 'translateX(-50%) translateY(' + ((this.state.caseBarIn || cases[caseIdx].comingSoon) ? '0rem' : '7.5rem') + ')',
+      caseBarT: 'translateX(-50%) translateY(' + (this.state.caseBarIn ? '0rem' : '7.5rem') + ')',
       caseToTop: (e) => {
         e.preventDefault();
         const root = this.caseRootRef.current;
