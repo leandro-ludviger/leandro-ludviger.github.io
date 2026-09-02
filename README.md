@@ -2,9 +2,6 @@
 
 Site publicado em **https://leandro-ludviger.github.io**
 
-Cada projeto tem endereço próprio, para você mandar um link isolado numa
-candidatura ou no LinkedIn:
-
 | Projeto | Endereço |
 | --- | --- |
 | Sanctu | `/projetos/sanctu/` |
