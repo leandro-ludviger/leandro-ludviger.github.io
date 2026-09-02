@@ -35,6 +35,9 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
 
 
+
+
+
 <script src="/support.js"></script>
 </head>
 <body>
@@ -361,7 +364,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
   <div style="flex: 1; overflow-y: auto; display: flex; justify-content: center; align-items: flex-start; padding: {{ infoPad }}; animation: {{ infoContentAnim }};">
     <div onclick="{{ stopClick }}" style="width: {{ infoW }}; max-width: 100%; display: flex; flex-direction: column; gap: 1rem;">
       <div style="height: 21.25rem; background: #0A0A09; border-radius: 0.375rem; overflow: hidden;">
-        <img src="/assets/retrato-color.webp" alt="Retrato de Leandro Ludviger Raucci" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img loading="lazy" decoding="async" src="/assets/retrato-color.webp" alt="Retrato de Leandro Ludviger Raucci" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </div>
       <div style="background: {{ th.card }}; border-radius: 0.375rem; padding: 2rem 2.25rem;">
         <p style="font-size: 1.3125rem; line-height: 1.55; font-weight: 400; margin: 0; color: {{ th.text2 }};">{{ t.bio }}</p>
@@ -436,13 +439,13 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
   <div ref="{{ caseContentRef }}" style="padding: {{ casePad }}; animation: {{ caseContentAnim }}; background-color: {{ caseContentBg }}; min-height: 100vh; box-sizing: border-box;">
     <div data-hero-cover="1" style="height: {{ coverH }}; min-height: {{ coverMinH }}; background: {{ activeCase.cover }}; border-radius: 1rem; overflow: hidden; display: flex; align-items: flex-end; padding: 3rem; box-sizing: border-box; position: relative;">
       <sc-if value="{{ isSanctu }}" hint-placeholder-val="{{ false }}">
-        <video key="{{ heroVideo }}" data-late-src="{{ heroVideo }}" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); object-fit: cover;"></video>
+        <video preload="none" key="{{ heroVideo }}" data-late-src="{{ heroVideo }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); object-fit: cover;"></video>
       </sc-if>
       <sc-if value="{{ notSanctu }}" hint-placeholder-val="{{ true }}">
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: {{ activeCase.coverText }};">{{ activeCase.placeholder }}</span>
       </sc-if>
       <sc-if value="{{ isMeridian }}" hint-placeholder-val="{{ false }}">
-        <video src="/assets/meridian/pattern-loop-sm.webm" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+        <video preload="none" src="/assets/meridian/pattern-loop-sm.webm" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block;"></video>
         <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,0.3) 0%, rgba(10,11,13,0) 35%, rgba(10,11,13,0.45) 100%); pointer-events: none;"></div>
       </sc-if>
     </div>
@@ -479,8 +482,8 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
     <!-- SEÇÕES: Problema → Estratégia → Solução -->
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 1.25rem 0 4.5rem;">
-      <div data-iso-card="1" style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6;"><img data-iso="left" src="/assets/0ad00ae0.webp" alt="Ilustração isométrica — terra degradada" style="width: 160%; height: 100%; object-fit: cover; display: block; transform: translateX(-50%); will-change: transform;"></div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6;"><img data-iso="right" src="/assets/c1da12c9.webp" alt="Ilustração isométrica — fazenda regenerada com casa e agrofloresta" style="width: 160%; height: 100%; object-fit: cover; display: block; transform: translateX(12.5%); will-change: transform;"></div>
+      <div data-iso-card="1" style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6;"><img loading="lazy" decoding="async" data-iso="left" src="/assets/0ad00ae0.webp" alt="Ilustração isométrica — terra degradada" style="width: 160%; height: 100%; object-fit: cover; display: block; transform: translateX(-50%); will-change: transform;"></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6;"><img loading="lazy" decoding="async" data-iso="right" src="/assets/c1da12c9.webp" alt="Ilustração isométrica — fazenda regenerada com casa e agrofloresta" style="width: 160%; height: 100%; object-fit: cover; display: block; transform: translateX(12.5%); will-change: transform;"></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
@@ -489,10 +492,10 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       </div>
       <div data-problem-card="1" style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6; position: relative;">
         <sc-if value="{{ problemPhone }}" hint-placeholder-val="{{ false }}">
-        <img data-late-src="{{ problemPhone }}" alt="App Sanctu — tela Minha dívida" style="position: absolute; left: 50%; top: 20%; transform: translateX(-50%); height: 100%; width: auto; display: block;">
-        <div data-chip="1" style="position: absolute; left: 61.5%; top: 40%; transform: translate(-50%, -50%) translateY(1rem); width: {{ chipW1 }}; opacity: 0; transition: opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;"><img data-late-src="{{ problemChip1 }}" alt="Dinheiro instantâneo" style="width: 100%; display: block; filter: drop-shadow(0 0.75rem 1.5rem rgba(15, 44, 28, 0.14));"></div>
-        <div data-chip="2" style="position: absolute; left: 27%; top: 50%; transform: translate(-50%, -50%) translateY(1rem); width: {{ chipW2 }}; opacity: 0; transition: opacity 0.6s ease 0.5s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;"><img data-late-src="{{ problemChip2 }}" alt="Conta digital" style="width: 100%; display: block; filter: drop-shadow(0 0.75rem 1.5rem rgba(15, 44, 28, 0.14));"></div>
-        <div data-chip="3" style="position: absolute; left: 72%; top: 58.5%; transform: translate(-50%, -50%) translateY(1rem); width: {{ chipW3 }}; opacity: 0; transition: opacity 0.6s ease 0.9s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.9s;"><img data-late-src="{{ problemChip3 }}" alt="8% Juros anuais" style="width: 100%; display: block; filter: drop-shadow(0 0.75rem 1.5rem rgba(15, 44, 28, 0.14));"></div>
+        <img loading="lazy" decoding="async" data-late-src="{{ problemPhone }}" alt="App Sanctu — tela Minha dívida" style="position: absolute; left: 50%; top: 20%; transform: translateX(-50%); height: 100%; width: auto; display: block;">
+        <div data-chip="1" style="position: absolute; left: 61.5%; top: 40%; transform: translate(-50%, -50%) translateY(1rem); width: {{ chipW1 }}; opacity: 0; transition: opacity 0.6s ease 0.1s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;"><img loading="lazy" decoding="async" data-late-src="{{ problemChip1 }}" alt="Dinheiro instantâneo" style="width: 100%; display: block; filter: drop-shadow(0 0.75rem 1.5rem rgba(15, 44, 28, 0.14));"></div>
+        <div data-chip="2" style="position: absolute; left: 27%; top: 50%; transform: translate(-50%, -50%) translateY(1rem); width: {{ chipW2 }}; opacity: 0; transition: opacity 0.6s ease 0.5s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.5s;"><img loading="lazy" decoding="async" data-late-src="{{ problemChip2 }}" alt="Conta digital" style="width: 100%; display: block; filter: drop-shadow(0 0.75rem 1.5rem rgba(15, 44, 28, 0.14));"></div>
+        <div data-chip="3" style="position: absolute; left: 72%; top: 58.5%; transform: translate(-50%, -50%) translateY(1rem); width: {{ chipW3 }}; opacity: 0; transition: opacity 0.6s ease 0.9s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.9s;"><img loading="lazy" decoding="async" data-late-src="{{ problemChip3 }}" alt="8% Juros anuais" style="width: 100%; display: block; filter: drop-shadow(0 0.75rem 1.5rem rgba(15, 44, 28, 0.14));"></div>
         </sc-if>
       </div>
     </div>
@@ -503,7 +506,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p2 }}</p>
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p3 }}</p>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #fdfef6; display: flex; align-items: center; justify-content: center;"><video key="{{ strategyVideo }}" data-late-src="{{ strategyVideo }}" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 92%; max-height: 92%; display: block;"></video></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #fdfef6; display: flex; align-items: center; justify-content: center;"><video preload="none" key="{{ strategyVideo }}" data-late-src="{{ strategyVideo }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 92%; max-height: 92%; display: block;"></video></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: {{ s4Pad }};">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
@@ -512,7 +515,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p2 }}</p>
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p3 }}</p>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6; display: flex; align-items: center; justify-content: center;"><sc-if value="{{ solutionImg }}" hint-placeholder-val="{{ false }}"><img data-late-src="{{ solutionImg }}" alt="Site da Sanctu aberto em um laptop — seção de produtos" style="width: 100%; height: 100%; display: block; object-fit: cover;"></sc-if></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6; display: flex; align-items: center; justify-content: center;"><sc-if value="{{ solutionImg }}" hint-placeholder-val="{{ false }}"><img loading="lazy" decoding="async" data-late-src="{{ solutionImg }}" alt="Site da Sanctu aberto em um laptop — seção de produtos" style="width: 100%; height: 100%; display: block; object-fit: cover;"></sc-if></div>
     </div>
 
     <div style="padding: {{ slidesPad }};">
@@ -544,7 +547,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         </div>
       </div>
       <div style="display: flex; justify-content: center; padding: 6rem 0 0;">
-        <div style="width: min(40rem, 100%); aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden;"><img src="/assets/export/opt/sanctu-couple.webp" alt="Casal de produtores parceiros da Sanctu em seu terreno" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+        <div style="width: min(40rem, 100%); aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden;"><img loading="lazy" decoding="async" src="/assets/export/opt/sanctu-couple.webp" alt="Casal de produtores parceiros da Sanctu em seu terreno" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
       </div>
     </div>
     </sc-if>
@@ -562,7 +565,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.s2title }}</h2>
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mb.s2p1 }}</p>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden;"><img src="/assets/mb/opt/problema-app-antigo-2.webp" alt="App antigo do Mercado Bitcoin" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden;"><img loading="lazy" decoding="async" src="/assets/mb/opt/problema-app-antigo-2.webp" alt="App antigo do Mercado Bitcoin" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
@@ -573,16 +576,16 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       <div style="display: flex; flex-direction: column; gap: 1rem;">
         <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FF593D; position: relative;">
           <div style="display: flex; flex-direction: column; padding: 0 3rem; animation: vertCarousel 32s linear infinite; will-change: transform;">
-            <img src="/assets/mb/opt/survey-c1.webp" alt="Survey — motivo de cadastro" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c2.webp" alt="Survey — motivo de não investir" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c3.webp" alt="Survey — o que melhorar" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c4.webp" alt="Survey — em que já investiu" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c5.webp" alt="Survey — dashboard de ativos" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c1.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c2.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c3.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c4.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
-            <img src="/assets/mb/opt/survey-c5.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c1.webp" alt="Survey — motivo de cadastro" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c2.webp" alt="Survey — motivo de não investir" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c3.webp" alt="Survey — o que melhorar" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c4.webp" alt="Survey — em que já investiu" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c5.webp" alt="Survey — dashboard de ativos" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c1.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c2.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c3.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c4.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
+            <img loading="lazy" decoding="async" src="/assets/mb/opt/survey-c5.webp" alt="" style="width: 100%; border-radius: 0.75rem; display: block; margin-bottom: 1.5rem;">
           </div>
         </div>
       </div>
@@ -592,14 +595,14 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <div style="display: flex; flex-direction: column; gap: 3rem; padding: 0 0 4.5rem;">
       <div style="display: flex; flex-direction: column; gap: 1rem;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1.25rem;">
-          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img src="/assets/mb/sketch-1.png" alt="Crazy 8" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
-          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img src="/assets/mb/sketch-2.png" alt="Esboços" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
-          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img src="/assets/mb/sketch-3.png" alt="Esboço de home" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
-          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img src="/assets/mb/sketch-4.png" alt="Esboço de dashboard" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
+          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img loading="lazy" decoding="async" src="/assets/mb/sketch-1.png" alt="Crazy 8" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
+          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img loading="lazy" decoding="async" src="/assets/mb/sketch-2.png" alt="Esboços" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
+          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img loading="lazy" decoding="async" src="/assets/mb/sketch-3.png" alt="Esboço de home" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
+          <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }};"><img loading="lazy" decoding="async" src="/assets/mb/sketch-4.png" alt="Esboço de dashboard" style="width: 100%; height: 18rem; object-fit: cover; display: block;"></div>
         </div>
       </div>
       <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }}; background: #FFFFFF; display: flex; align-items: center; justify-content: center;"><img src="/assets/mb/wireframes.png" alt="Wireframes" style="width: 100%; max-height: 26rem; object-fit: contain; display: block;"></div>
+        <div style="border-radius: 1rem; overflow: hidden; border: 0.0625rem solid {{ th.divider }}; background: #FFFFFF; display: flex; align-items: center; justify-content: center;"><img loading="lazy" decoding="async" src="/assets/mb/wireframes.png" alt="Wireframes" style="width: 100%; max-height: 26rem; object-fit: contain; display: block;"></div>
       </div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
@@ -609,7 +612,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p2 }}</p>
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p3 }}</p>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden;"><img src="/assets/mb/opt/home-screens.webp" alt="Nova home — dashboard do investidor" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden;"><img loading="lazy" decoding="async" src="/assets/mb/opt/home-screens.webp" alt="Nova home — dashboard do investidor" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
 
     <!-- FOOTER: Impacto -->
@@ -634,7 +637,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         </div>
       </div>
       <div style="display: flex; justify-content: center; padding: 6rem 0 0;">
-        <div style="width: min(40rem, 100%); aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden;"><img src="/assets/mb/opt/closing-hand-3.webp" alt="App Mercado Bitcoin em uso" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+        <div style="width: min(40rem, 100%); aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden;"><img loading="lazy" decoding="async" src="/assets/mb/opt/closing-hand-3.webp" alt="App Mercado Bitcoin em uso" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
       </div>
     </div>
 
@@ -653,7 +656,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s2title }}</h2>
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mer.s2p1 }}</p>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img src="/assets/meridian/opt/problema-home-3.webp" alt="Meridian — home com Safe to Spend" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/problema-home-3.webp" alt="Meridian — home com Safe to Spend" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
@@ -661,13 +664,13 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mer.s3p1 }}</p>
         <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mer.s3p2 }}</p>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img src="/assets/meridian/opt/estrategia-sts.webp" alt="Meridian — Safe to Spend" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/estrategia-sts.webp" alt="Meridian — Safe to Spend" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 1.25rem; padding: 4.5rem 0;">
-      <div style="border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><img src="/assets/meridian/opt/five-screens-2.webp" alt="Meridian — telas do app" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/five-screens-2.webp" alt="Meridian — telas do app" style="width: 100%; display: block;"></div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
-        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><img src="/assets/meridian/opt/icons-3d.webp" alt="Meridian — ícones 3D" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img src="/assets/meridian/opt/pocket.webp" alt="Meridian — cartão no app, no bolso" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/icons-3d.webp" alt="Meridian — ícones 3D" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/pocket.webp" alt="Meridian — cartão no app, no bolso" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
       </div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
@@ -687,7 +690,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
           <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mer.s4b3 }}</p>
         </div>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><video src="/assets/meridian/solucao-loop-sm.webm" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 100%; max-height: 100%; display: block;"></video></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><video preload="none" src="/assets/meridian/solucao-loop-sm.webm" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 100%; max-height: 100%; display: block;"></video></div>
     </div>
 
     <!-- FOOTER: Destaques -->
@@ -1060,10 +1063,14 @@ class Component extends DCLogic {
     const tick = () => {
       try { this.paintMer(); } catch (e) {}
       try { this.paintMerLogo(); } catch (e) {}
-      document.querySelectorAll('video[loop]').forEach((vd) => { vd.muted = true; if (vd.paused) { vd.play().catch(() => {}); } });
+      const naTela = (el) => {
+        const r = el.getBoundingClientRect();
+        return r.width > 0 && r.height > 0 && r.bottom > -400 && r.top < window.innerHeight + 400;
+      };
+      document.querySelectorAll('video[loop]').forEach((vd) => { if (!naTela(vd)) return; vd.muted = true; if (vd.paused) { vd.play().catch(() => {}); } });
       document.querySelectorAll('img[data-late-src], video[data-late-src]').forEach((im) => {
         const v = im.getAttribute('data-late-src');
-        if (v && v.indexOf('{{') === -1 && im.getAttribute('src') !== v) {
+        if (v && v.indexOf('{{') === -1 && im.getAttribute('src') !== v && naTela(im)) {
           im.setAttribute('src', v);
           if (im.tagName === 'VIDEO') { im.muted = true; im.play && im.play().catch(() => {}); }
         }
