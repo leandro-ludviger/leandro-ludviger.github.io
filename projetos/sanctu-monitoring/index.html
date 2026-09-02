@@ -425,6 +425,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
 
   <div ref="{{ caseContentRef }}" style="padding: {{ casePad }}; animation: {{ caseContentAnim }}; background-color: {{ caseContentBg }}; min-height: 100vh; box-sizing: border-box;">
+    <sc-if value="{{ notComingSoon }}" hint-placeholder-val="{{ true }}">
     <div data-hero-cover="1" style="height: {{ coverH }}; min-height: {{ coverMinH }}; background: {{ activeCase.cover }}; border-radius: 1rem; overflow: hidden; display: flex; align-items: flex-end; padding: 3rem; box-sizing: border-box; position: relative;">
       <sc-if value="{{ isSanctu }}" hint-placeholder-val="{{ false }}">
         <video preload="none" key="{{ heroVideo }}" data-late-src="{{ heroVideo }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); object-fit: cover;"></video>
@@ -437,6 +438,14 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,0.3) 0%, rgba(10,11,13,0) 35%, rgba(10,11,13,0.45) 100%); pointer-events: none;"></div>
       </sc-if>
     </div>
+    </sc-if>
+
+    <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
+    <div style="min-height: 76vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.875rem; padding: 3rem 1.5rem; text-align: center;">
+      <h1 style="font-size: {{ caseTitleSize }}; font-weight: 500; letter-spacing: {{ caseTitleSpacing }}; margin: 0;">{{ t.comingSoon }}</h1>
+      <p style="font-size: 1.25rem; line-height: 1.5; font-weight: 300; margin: 0; color: {{ th.subtext }};">{{ t.comingSoonBody }}</p>
+    </div>
+    </sc-if>
 
     <sc-if value="{{ isGeneric }}" hint-placeholder-val="{{ true }}">
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: {{ caseGapL }}; padding: 4.5rem 0.5rem 3.5rem; max-width: 85rem; margin: 0 auto;">
@@ -1308,14 +1317,14 @@ class Component extends DCLogic {
     };
 
     const t = pt ? {
-      info: 'Mais', infoOpen: 'Menos', langBtn: 'EN', comingSoon: 'Em breve',
+      info: 'Mais', infoOpen: 'Menos', langBtn: 'EN', comingSoon: 'Em breve', comingSoonBody: 'Case em construção',
       statement: 'Combino curiosidade, experimentação\ne pensamento sistêmico para desenhar\nsoluções escaláveis.',
       portrait: '[ retrato — arraste sua foto depois ]',
       bio: 'Ao longo da carreira, atuei em diferentes contextos — de startups em estágio inicial a empresas consolidadas. Essa diversidade me ensinou que não existe um processo universal. Existe a capacidade de adaptar métodos, alinhar pessoas e construir soluções que gerem valor para quem as utiliza — e para quem as constrói.',
       skills: 'Capacidades', experience: 'Experiência', result: 'RESULTADO', back: 'voltar para a home', next: 'Próximo', closeBtn: 'fechar', nextProject: 'Próximo projeto', myRole: 'Mais detalhes', toTop: 'voltar ao topo',
       imgDetail: '[ detalhe', imgFull: '[ imagem full-bleed ]'
     } : {
-      info: 'More', infoOpen: 'Less', langBtn: 'PT', comingSoon: 'Coming soon',
+      info: 'More', infoOpen: 'Less', langBtn: 'PT', comingSoon: 'Coming soon', comingSoonBody: 'Case study in progress',
       statement: 'I combine curiosity, experimentation\nand systems thinking to design\nscalable solutions.',
       portrait: '[ portrait — drop your photo here later ]',
       bio: 'Throughout my career, I have worked in different contexts — from early-stage startups to established companies. That diversity taught me there is no universal process. There is the ability to adapt methods, align people and build solutions that create value for those who use them — and for those who build them.',
@@ -1520,7 +1529,9 @@ class Component extends DCLogic {
       isMeridian: this.state.view === 'case' && !!cases[caseIdx].isMeridian,
       merRef: this.merRef,
       isMB: !!cases[caseIdx].isMB,
-      isGeneric: !cases[caseIdx].isSanctu && !cases[caseIdx].isMB && !cases[caseIdx].isMeridian,
+      isComingSoon: !!cases[caseIdx].comingSoon,
+      notComingSoon: !cases[caseIdx].comingSoon,
+      isGeneric: !cases[caseIdx].isSanctu && !cases[caseIdx].isMB && !cases[caseIdx].isMeridian && !cases[caseIdx].comingSoon,
       mb,
       mer: pt ? {
         heroIntro: 'Meridian é um conceito de banco digital que evolui de "mostre meu saldo" para inteligência financeira. Em vez de listar transações, o app responde a pergunta que importa: quanto eu posso gastar hoje sem comprometer o mês?\n\nAtuei no projeto de ponta a ponta apoiado por IA — dos princípios de design, passando por pesquisa, criação dos fluxos, interface, animações e copy.',
