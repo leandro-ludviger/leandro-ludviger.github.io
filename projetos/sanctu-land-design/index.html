@@ -450,7 +450,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: {{ activeCase.coverText }};">{{ activeCase.placeholder }}</span>
       </sc-if>
       <sc-if value="{{ isMeridian }}" hint-placeholder-val="{{ false }}">
-        <video preload="none" src="/assets/meridian/pattern-loop-sm.webm" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+        <video preload="none" data-late-src="/assets/meridian/pattern-loop-sm.mp4" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block;"></video>
         <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,0.3) 0%, rgba(10,11,13,0) 35%, rgba(10,11,13,0.45) 100%); pointer-events: none;"></div>
       </sc-if>
     </div>
@@ -702,7 +702,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       </div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
-      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; height: {{ mediaH }};">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; height: {{ colunaTextoH }};">
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s4title }}</h2>
         <div style="flex: 1;"></div>
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
@@ -718,7 +718,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
           <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mer.s4b3 }}</p>
         </div>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><video preload="none" src="/assets/meridian/solucao-loop-sm.webm" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 100%; max-height: 100%; display: block;"></video></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><video preload="none" data-late-src="/assets/meridian/solucao-loop-sm.mp4" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 100%; max-height: 100%; display: block;"></video></div>
     </div>
 
     <!-- FOOTER: Destaques -->
@@ -1012,7 +1012,8 @@ class Component extends DCLogic {
   }
 
   routeFromLocation() {
-    const m = location.pathname.match(/\/projetos\/([a-z0-9-]+)\/?$/);
+    // aceita tambem /projetos/<slug>/index.html, caso alguem linke o arquivo
+    const m = location.pathname.match(/\/projetos\/([a-z0-9-]+)(?:\/(?:index\.html)?)?$/);
     const i = m ? this.routes.indexOf(m[1]) : -1;
     let lang = 'pt';
     try { if (new URLSearchParams(location.search).get('lang') === 'en') lang = 'en'; } catch (e) {}
@@ -1148,7 +1149,16 @@ class Component extends DCLogic {
         const r = el.getBoundingClientRect();
         return r.width > 0 && r.height > 0 && r.bottom > -400 && r.top < window.innerHeight + 400;
       };
-      document.querySelectorAll('video[loop]').forEach((vd) => { if (!naTela(vd)) return; vd.muted = true; if (vd.paused) { vd.play().catch(() => {}); } });
+      document.querySelectorAll('video[loop]').forEach((vd) => {
+        if (!naTela(vd)) return;
+        // o React define muted como propriedade; o Safari do iPhone so libera
+        // reproducao inline se o atributo estiver presente no elemento
+        vd.muted = true;
+        if (!vd.hasAttribute('muted')) vd.setAttribute('muted', '');
+        if (!vd.hasAttribute('playsinline')) vd.setAttribute('playsinline', '');
+        if (!vd.hasAttribute('autoplay')) vd.setAttribute('autoplay', '');
+        if (vd.paused) { vd.play().catch(() => {}); }
+      });
       document.querySelectorAll('img[data-late-src], video[data-late-src]').forEach((im) => {
         const v = im.getAttribute('data-late-src');
         if (v && v.indexOf('{{') === -1 && im.getAttribute('src') !== v && naTela(im)) {
@@ -1610,8 +1620,8 @@ class Component extends DCLogic {
         f1: c.img1 ? 'none' : 'saturate(0.85)', f2: c.img2 ? 'none' : 'saturate(0.7) brightness(1.08)', fF: c.imgFull ? 'none' : 'brightness(0.92)',
         lb1: c.img1 ? '' : t.imgDetail + ' 01', lb2: c.img2 ? '' : t.imgDetail + ' 02', lbF: c.imgFull ? '' : t.imgFull }; })(),
       isSanctu: !!cases[caseIdx].isSanctu,
-      heroVideo: ((window.__resources && window.__resources.heroPt) || '/assets/hero-pt-sm.webm'),
-      strategyVideo: pt ? ((window.__resources && window.__resources.stratPt) || '/assets/392ac974.webm') : ((window.__resources && window.__resources.stratEn) || '/assets/strategy-en-v2.mp4'),
+      heroVideo: ((window.__resources && window.__resources.heroPt) || '/assets/hero-pt-sm.mp4'),
+      strategyVideo: pt ? ((window.__resources && window.__resources.stratPt) || '/assets/392ac974.mp4') : ((window.__resources && window.__resources.stratEn) || '/assets/strategy-en-v2.mp4'),
       imgsReady: true,
       problemPhone: pt ? ((window.__resources && window.__resources.phonePt) || '/assets/problem-phone-pt.png') : ((window.__resources && window.__resources.phoneEn) || '/assets/problem-phone-en.png'),
       problemChip1: pt ? ((window.__resources && window.__resources.chip1Pt) || '/assets/87b14d98.webp') : ((window.__resources && window.__resources.chip1En) || '/assets/chip-card-en.png'),
@@ -1879,6 +1889,9 @@ class Component extends DCLogic {
       caseTitleSize: isMobile ? '2rem' : '4rem',
       caseTitleSpacing: isMobile ? '-0.0625rem' : '-0.1563rem',
       mediaH: isMobile ? '58vw' : '68vh',
+      // no celular a coluna de texto nao pode herdar a altura da midia:
+      // 58vw nao cabe um titulo e tres paragrafos, e o texto transbordava
+      colunaTextoH: isMobile ? 'auto' : '68vh',
       s4Pad: isMobile ? '4.5rem 0 0' : '4.5rem 0',
       slidesPad: isMobile ? '1.25rem 0 0' : '4.5rem 0 0',
       navBtnsPE: (isMobile && this.state.logoIntro) ? 'none' : 'auto',
