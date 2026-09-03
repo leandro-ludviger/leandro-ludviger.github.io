@@ -316,7 +316,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 <div ref="{{ cursorRef }}" data-lr-cursor="1" style="position: fixed; top: 0; left: 0; width: 0.875rem; height: 0.875rem; border-radius: 50%; background: #EDEDEA; mix-blend-mode: difference; pointer-events: none; z-index: 9999; transform: translate(-12.5rem, -12.5rem); transition: width 0.22s ease, height 0.22s ease, background 0.22s ease;"></div>
 
 <!-- ================= HEADER GLOBAL (fixo) ================= -->
-<div style="position: fixed; top: 0; left: 0; right: 0; height: 7.5rem; z-index: 665; pointer-events: none; backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); background: {{ th.glassGrad }}; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);"></div>
+<div style="position: fixed; top: 0; left: 0; right: 0; height: 7.5rem; z-index: 665; pointer-events: none; backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); background: {{ glassGradHeader }}; -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 45%, transparent 100%);"></div>
 <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: flex-start; justify-content: space-between; padding: {{ navPad }}; color: {{ th.text }}; pointer-events: none; font-family: 'Archivo', sans-serif;">
   <a href="#" onclick="{{ goHome }}" onmouseenter="{{ logoEnter }}" onmouseleave="{{ logoLeave }}" style="pointer-events: auto; background: {{ th.panel }}; backdrop-filter: blur(22px) saturate(1.6); -webkit-backdrop-filter: blur(22px) saturate(1.6); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07); border-radius: 10px; padding: {{ logoPad }}; height: {{ btnH }}; box-sizing: border-box; font-weight: 600; font-size: {{ btnFs }}; letter-spacing: 1.5px; transform: {{ logoTx }}; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); display: flex; align-items: center; white-space: nowrap;" style-hover="opacity: 1;"><span>L</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">EANDRO</span><span style="margin-left: 7px;">L</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">UDVIGER</span><span style="margin-left: 7px;">R</span><span style="display: inline-block; overflow: hidden; max-width: {{ logoMax }}; opacity: {{ logoOp }}; transition: max-width 1.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;">AUCCI</span></a>
 
@@ -1667,6 +1667,12 @@ class Component extends DCLogic {
       waitFieldBorder: this.state.waitStatus === 'invalid' ? th.chipBorder : th.cardBorder,
       waitHasMsg: this.state.waitStatus === 'invalid' || this.state.waitStatus === 'error',
       waitMsg: this.state.waitStatus === 'invalid' ? t.waitInvalid : (this.state.waitStatus === 'error' ? t.waitError : ''),
+      // o veu do header imita o que esta atras dele. Nos cases o fundo e
+      // sempre escuro, inclusive no tema claro — medido nos quatro cases,
+      // em varias posicoes de rolagem. Na home, segue o tema.
+      glassGradHeader: this.state.view === 'case'
+        ? 'linear-gradient(180deg, rgba(10,10,9,0.55), rgba(10,10,9,0.08))'
+        : th.glassGrad,
       caseOverflowY: cases[caseIdx].comingSoon ? 'hidden' : 'auto',
       isComingSoon: !!cases[caseIdx].comingSoon,
       notComingSoon: !cases[caseIdx].comingSoon,
