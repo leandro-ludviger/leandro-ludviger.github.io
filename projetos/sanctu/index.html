@@ -267,6 +267,16 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
   html, body { margin: 0; height: 100%; background: #0A0A09; }
   a { color: inherit; text-decoration: none; }
   a:hover { filter: brightness(1.25); }
+  /* quem liga 'reduzir movimento' no sistema tem motivo — vertigem,
+     enxaqueca, epilepsia vestibular. Animacao vira corte seco. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
   /* dvh acompanha a barra do navegador no celular; vh nao, e o conteudo
      do rodape fica embaixo dela. Fallback para navegador sem dvh: */
   @supports not (height: 100dvh) {
@@ -344,7 +354,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
   <div ref="{{ stripRef }}" style="display: flex; gap: 1.125rem; align-items: stretch; overflow-x: hidden; padding: 2.5rem 1.75rem 1rem; flex: 0 0 auto; opacity: {{ homeOp }};">
     <sc-for list="{{ casesLoop }}" as="c" hint-placeholder-count="10">
-      <a href="#" onclick="{{ c.openFly }}" onmouseenter="{{ c.cardEnter }}" onmouseleave="{{ c.cardLeave }}" style="flex: 0 0 {{ cardBasis }}; display: block; transition: filter 0.35s ease; cursor: pointer;">
+      <a href="#" onclick="{{ c.openFly }}" onmouseenter="{{ c.cardEnter }}" onmouseleave="{{ c.cardLeave }}" aria-hidden="{{ c.copiaDoCarrossel }}" tabindex="{{ c.focoDaCopia }}" style="flex: 0 0 {{ cardBasis }}; display: block; transition: filter 0.35s ease; cursor: pointer;">
         <div style="height: {{ cardH }}; background: {{ c.coverHome }}; border-radius: 16px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center;">
           <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{ c.coverText }};">{{ c.homePlaceholder }}</span>
           <sc-if value="{{ c.isMeridian }}" hint-placeholder-val="{{ false }}">
@@ -1107,6 +1117,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    this.semMovimento = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     this.initRouter();
     this.logoIntroTimer = setTimeout(() => { this.setState({ logoIntro: false }); }, 3000);
     this.onResize = () => this.setState({ vw: window.innerWidth });
@@ -1160,7 +1171,7 @@ class Component extends DCLogic {
         if (!vd.hasAttribute('muted')) vd.setAttribute('muted', '');
         if (!vd.hasAttribute('playsinline')) vd.setAttribute('playsinline', '');
         if (!vd.hasAttribute('autoplay')) vd.setAttribute('autoplay', '');
-        if (vd.paused) { vd.play().catch(() => {}); }
+        if (vd.paused && !this.semMovimento) { vd.play().catch(() => {}); }
       });
       document.querySelectorAll('img[data-late-src], video[data-late-src]').forEach((im) => {
         const v = im.getAttribute('data-late-src');
@@ -1172,7 +1183,7 @@ class Component extends DCLogic {
       const strip = this.stripRef.current;
       if (strip) {
         const half = strip.scrollWidth / 2;
-        if (half > 0 && !this.state.inFlight) {
+        if (half > 0 && !this.state.inFlight && !this.semMovimento) {
           if (this.pos == null) this.pos = strip.scrollLeft;
           this.pos += 0.25 + this.boost;
           this.boost *= 0.94;
@@ -1567,6 +1578,8 @@ class Component extends DCLogic {
     return {
       t, cases,
       casesLoop: [...cases, ...cases].map((c, li) => ({
+        copiaDoCarrossel: li >= cases.length ? 'true' : null,
+        focoDaCopia: li >= cases.length ? -1 : null,
         ...c,
         hasTagline: !c.comingSoon,
         overlayOp: (isMobile || this.state.stripHover === li) ? 1 : 0,
