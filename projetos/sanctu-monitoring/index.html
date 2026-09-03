@@ -264,6 +264,12 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
   html, body { margin: 0; height: 100%; background: #0A0A09; }
   a { color: inherit; text-decoration: none; }
   a:hover { filter: brightness(1.25); }
+  /* dvh acompanha a barra do navegador no celular; vh nao, e o conteudo
+     do rodape fica embaixo dela. Fallback para navegador sem dvh: */
+  @supports not (height: 100dvh) {
+    [data-screen-label="Home"] { height: 100vh !important; }
+    [data-case-content="1"] { min-height: 100vh !important; }
+  }
   /* o preenchimento automatico do navegador pinta o campo de branco;
      a transicao longa impede essa cor de aparecer */
   input:-webkit-autofill, input:-webkit-autofill:hover,
@@ -324,7 +330,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
 <!-- ================= HOME ================= -->
 <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
-<div data-screen-label="Home" style="height: 100vh; background: {{ th.bg }}; color: {{ th.text }}; transition: background 0.35s ease, color 0.35s ease; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; overflow: hidden;">
+<div data-screen-label="Home" style="height: 100dvh; background: {{ th.bg }}; color: {{ th.text }}; transition: background 0.35s ease, color 0.35s ease; font-family: 'Archivo', sans-serif; display: flex; flex-direction: column; overflow: hidden;">
 
 
   <div style="padding: 7.125rem 1.75rem 0; flex: 0 0 auto;">
@@ -434,7 +440,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
   </div>
 
 
-  <div ref="{{ caseContentRef }}" style="padding: {{ casePad }}; animation: {{ caseContentAnim }}; background-color: {{ caseContentBg }}; min-height: 100vh; box-sizing: border-box;">
+  <div data-case-content="1" ref="{{ caseContentRef }}" style="padding: {{ casePad }}; animation: {{ caseContentAnim }}; background-color: {{ caseContentBg }}; min-height: 100dvh; box-sizing: border-box;">
     <sc-if value="{{ notComingSoon }}" hint-placeholder-val="{{ true }}">
     <div data-hero-cover="1" style="height: {{ coverH }}; min-height: {{ coverMinH }}; background: {{ activeCase.cover }}; border-radius: 1rem; overflow: hidden; display: flex; align-items: flex-end; padding: 3rem; box-sizing: border-box; position: relative;">
       <sc-if value="{{ isSanctu }}" hint-placeholder-val="{{ false }}">
