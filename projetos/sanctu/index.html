@@ -456,6 +456,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
     <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 7rem 1.5rem; box-sizing: border-box; text-align: center;">
       <h1 style="font-family: 'Archivo', sans-serif; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; line-height: 1.4; margin: 0; color: {{ th.text }};">{{ t.comingSoonBody }}</h1>
+      <sc-if value="{{ waitFormOn }}" hint-placeholder-val="{{ false }}">
       <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
       <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%; max-width: 30rem;">
         <input ref="{{ waitTrapRef }}" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
@@ -470,6 +471,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       <div style="font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 300; margin: 0; color: {{ th.text }};">{{ t.waitOk }}</div>
       </sc-if>
       <div style="font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.statement }};">{{ t.waitPrivacy }}</div>
+      </sc-if>
     </div>
     </sc-if>
 
@@ -1046,6 +1048,10 @@ class Component extends DCLogic {
   }
 
   // --- Aviso por e-mail nos cases em construcao ---
+  // Interruptor: mude para true e o campo de e-mail volta a aparecer.
+  // Nada foi removido — textos, envio e chave seguem prontos.
+  MOSTRAR_AVISO_EMAIL = false;
+
   WAIT_KEY = '929fdd4a-9933-4f85-a6f7-1afc478ff5d7';
 
   onWaitInput = (e) => {
@@ -1616,6 +1622,7 @@ class Component extends DCLogic {
       isMeridian: this.state.view === 'case' && !!cases[caseIdx].isMeridian,
       merRef: this.merRef,
       isMB: !!cases[caseIdx].isMB,
+      waitFormOn: this.MOSTRAR_AVISO_EMAIL,
       waitEmail: this.state.waitEmail,
       onWaitInput: this.onWaitInput,
       submitWait: this.submitWait,

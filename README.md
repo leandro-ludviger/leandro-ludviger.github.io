@@ -85,6 +85,21 @@ conteúdo. Eles têm endereço funcionando, mas estão marcados para o Google
 não indexar enquanto estiverem vazios — quando o conteúdo entrar, tire o
 `"em_breve": True` do `build.py` e rode a geração de novo.
 
+## O campo de e-mail dos cases em construção
+
+Existe um campo pronto — "deixe seu e-mail e eu aviso quando o case sair" —
+que hoje está **desligado**. Ele envia para a sua caixa pessoal via Web3Forms,
+já com validação, estados de erro e textos nos dois idiomas.
+
+Para ligar, procure esta linha no `index.html` e troque `false` por `true`:
+
+```
+MOSTRAR_AVISO_EMAIL = false;
+```
+
+Depois rode `python3 build.py`. Nada precisa ser reescrito — a chave de
+acesso e os textos continuam no arquivo.
+
 **Se acrescentar ou remover um projeto**, a lista `routes` dentro do
 `index.html` e a lista `PROJETOS` no `build.py` precisam mudar junto, na
 mesma ordem — é o que liga cada endereço ao projeto certo.
