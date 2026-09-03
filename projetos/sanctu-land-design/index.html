@@ -1417,11 +1417,11 @@ class Component extends DCLogic {
     const dark = theme === 'dark';
 
     const th = dark ? {
-      bg: '#0A0A09', glassGrad: 'linear-gradient(180deg, rgba(10,10,9,0.55), rgba(10,10,9,0.08))', panel: 'rgba(58,58,53,0.38)', panelHover: 'rgba(80,80,74,0.55)', panelGlass: 'rgba(28,28,26,0.88)',
+      bg: '#0A0A09', glassGrad: 'linear-gradient(180deg, rgba(10,10,9,0.28), rgba(10,10,9,0.03))', panel: 'rgba(58,58,53,0.38)', panelHover: 'rgba(80,80,74,0.55)', panelGlass: 'rgba(28,28,26,0.88)',
       text: '#EDEDEA', text2: '#D8D8D2', statement: '#6E6E66', knob: '#EDEDEA',
       subtext: '#8A8A82', card: '#161614', cardBorder: '#24241F', chipBorder: '#4A4A42', divider: '#1E1E1B'
     } : {
-      bg: '#F4F4F1', glassGrad: 'linear-gradient(180deg, rgba(244,244,241,0.55), rgba(244,244,241,0.08))', panel: 'rgba(232,232,226,0.42)', panelHover: 'rgba(210,210,203,0.6)', panelGlass: 'rgba(228,228,223,0.9)',
+      bg: '#F4F4F1', glassGrad: 'linear-gradient(180deg, rgba(244,244,241,0.28), rgba(244,244,241,0.03))', panel: 'rgba(232,232,226,0.42)', panelHover: 'rgba(210,210,203,0.6)', panelGlass: 'rgba(228,228,223,0.9)',
       text: '#111110', text2: '#3A3A36', statement: '#9B9B90', knob: '#111110',
       subtext: '#77776E', card: '#FDFEF6', cardBorder: '#D8D8D2', chipBorder: '#A3A399', divider: '#E6E6E1'
     };
@@ -1667,12 +1667,10 @@ class Component extends DCLogic {
       waitFieldBorder: this.state.waitStatus === 'invalid' ? th.chipBorder : th.cardBorder,
       waitHasMsg: this.state.waitStatus === 'invalid' || this.state.waitStatus === 'error',
       waitMsg: this.state.waitStatus === 'invalid' ? t.waitInvalid : (this.state.waitStatus === 'error' ? t.waitError : ''),
-      // o veu do header imita o que esta atras dele. Nos cases o fundo e
-      // sempre escuro, inclusive no tema claro — medido nos quatro cases,
-      // em varias posicoes de rolagem. Na home, segue o tema.
-      glassGradHeader: this.state.view === 'case'
-        ? 'linear-gradient(180deg, rgba(10,10,9,0.55), rgba(10,10,9,0.08))'
-        : th.glassGrad,
+      // o veu segue o tema. O que passa por baixo varia — ora bloco escuro de
+      // midia, ora a pagina — entao nenhum veu fixo combina com tudo. A saida
+      // e mante-lo fraco o bastante para ler como bruma, nao como faixa.
+      glassGradHeader: th.glassGrad,
       caseOverflowY: cases[caseIdx].comingSoon ? 'hidden' : 'auto',
       isComingSoon: !!cases[caseIdx].comingSoon,
       notComingSoon: !cases[caseIdx].comingSoon,
