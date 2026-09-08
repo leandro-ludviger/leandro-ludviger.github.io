@@ -95,6 +95,10 @@ def bloco_seo(titulo, desc, url, og, noindex=False):
         '<link rel="icon" href="/favicon.ico" sizes="32x32">',
         '<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
         '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
+        # Umami: analitica sem cookie, entao nao pede banner de consentimento.
+        # O defer garante que nao atrasa a renderizacao da pagina.
+        '<script defer src="https://cloud.umami.is/script.js" '
+        'data-website-id="e52f5990-49f5-47ab-a698-58f4c18a88ad"></script>',
         '<meta property="og:type" content="website">',
         '<meta property="og:site_name" content="Leandro Ludviger">',
         f'<meta property="og:title" content="{t}">',
