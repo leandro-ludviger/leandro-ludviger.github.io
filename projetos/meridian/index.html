@@ -1079,6 +1079,10 @@ class Component extends DCLogic {
   // pagina, o que cabe com folga nos 100 mil eventos/mes da camada gratuita,
   // e no painel eles leem melhor que uma media: mostram quantos passaram de
   // 2 minutos, nao um numero que esconde a distribuicao.
+  // profundidade de rolagem: e o dado que um heatmap de scroll entrega,
+  // sem precisar capturar movimento de mouse de cada visitante
+  MARCOS_ROLAGEM = [25, 50, 75, 100];
+
   MARCOS = [
     [10, 'leitura-10s'], [30, 'leitura-30s'], [60, 'leitura-1min'],
     [120, 'leitura-2min'], [300, 'leitura-5min'], [600, 'leitura-10min']
@@ -1092,9 +1096,24 @@ class Component extends DCLogic {
     } catch (e) {}
   }
 
+  mediRolagem() {
+    const alvo = document.querySelector('[data-screen-label="Case"]');
+    if (!alvo) return;                                   // home nao rola
+    if (alvo.scrollHeight - alvo.clientHeight < 200) return;  // pagina curta
+    const pct = Math.min(100, Math.round(
+      ((alvo.scrollTop + alvo.clientHeight) / alvo.scrollHeight) * 100));
+    while (this.rolagemEnviada < this.MARCOS_ROLAGEM.length &&
+           pct >= this.MARCOS_ROLAGEM[this.rolagemEnviada]) {
+      this.evento('rolagem-' + this.MARCOS_ROLAGEM[this.rolagemEnviada] + 'pc',
+                  { pagina: location.pathname });
+      this.rolagemEnviada += 1;
+    }
+  }
+
   iniciaMedicao() {
     this.segundosLidos = 0;
     this.marcosJaEnviados = 0;
+    this.rolagemEnviada = 0;
     this.ultimaAtividade = Date.now();
 
     const acorda = () => { this.ultimaAtividade = Date.now(); };
@@ -1106,6 +1125,7 @@ class Component extends DCLogic {
     this.relogioLeitura = setInterval(() => {
       // so conta com a aba visivel e sinal de atividade nos ultimos 60s
       if (document.visibilityState !== 'visible') return;
+      this.mediRolagem();
       if (Date.now() - this.ultimaAtividade > 60000) return;
       this.segundosLidos += 1;
       while (this.marcosJaEnviados < this.MARCOS.length &&
@@ -1120,6 +1140,7 @@ class Component extends DCLogic {
     // cada projeto e uma pagina: a contagem recomeca a cada troca de endereco
     this.segundosLidos = 0;
     this.marcosJaEnviados = 0;
+    this.rolagemEnviada = 0;
     this.ultimaAtividade = Date.now();
   }
 
