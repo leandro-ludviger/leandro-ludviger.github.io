@@ -388,7 +388,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       </div>
       <div style="background: {{ th.card }}; border-radius: 0.375rem; padding: 2rem 2.25rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem 1.75rem; font-size: 0.9375rem; color: {{ th.subtext }};">
         <span>São Paulo, Brasil</span>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem;"><a href="mailto:leandro.ludviger@gmail.com">leandro.ludviger@gmail.com</a><a href="https://www.linkedin.com/in/leandro-lr/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem 1.75rem;"><a href="mailto:leandro.ludviger@gmail.com">leandro.ludviger@gmail.com</a><a href="https://www.linkedin.com/in/leandro-lr/" onclick="{{ cliqueLinkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></div>
       </div>
       <div style="background: {{ th.card }}; border-radius: 0.375rem; padding: 2rem 2.25rem;">
         <div style="font-size: 0.8125rem; color: {{ th.subtext }}; margin-bottom: 0.5rem;">{{ t.skills }}</div>
@@ -1047,6 +1047,7 @@ class Component extends DCLogic {
     if (url === this._lastUrl) return;
     this._lastUrl = url;
     document.title = this.routeDocTitle(this.state.view, this.state.caseIdx, this.state.lang);
+    this.reiniciaMedicao();
     try { (push ? history.pushState : history.replaceState).call(history, {}, '', url); } catch (e) {}
   }
 
@@ -1064,6 +1065,58 @@ class Component extends DCLogic {
       this.setState({ view: q.view, caseIdx: q.caseIdx, lang: q.lang, infoOpen: false, inFlight: false, caseEntering: false, caseLeaving: false });
     };
     window.addEventListener('popstate', this.onPopState);
+  }
+
+  // --- Medicao de leitura (Umami) ---
+  // O Umami calcula tempo pela diferenca entre pageviews, entao quem le uma
+  // pagina longa e fecha a aba conta como zero — e o caso deste site, que e
+  // feito de paginas longas de leitura. Ver a issue #3518 do projeto.
+  // Solucao: marcos de leitura como eventos proprios. Sao no maximo 6 por
+  // pagina, o que cabe com folga nos 100 mil eventos/mes da camada gratuita,
+  // e no painel eles leem melhor que uma media: mostram quantos passaram de
+  // 2 minutos, nao um numero que esconde a distribuicao.
+  MARCOS = [
+    [10, 'leitura-10s'], [30, 'leitura-30s'], [60, 'leitura-1min'],
+    [120, 'leitura-2min'], [300, 'leitura-5min'], [600, 'leitura-10min']
+  ];
+
+  evento(nome, dados) {
+    try {
+      if (window.umami && typeof window.umami.track === 'function') {
+        window.umami.track(nome, dados || undefined);
+      }
+    } catch (e) {}
+  }
+
+  iniciaMedicao() {
+    this.segundosLidos = 0;
+    this.marcosJaEnviados = 0;
+    this.ultimaAtividade = Date.now();
+
+    const acorda = () => { this.ultimaAtividade = Date.now(); };
+    this.aoInteragir = acorda;
+    ['scroll', 'pointerdown', 'keydown', 'wheel', 'touchstart'].forEach((ev) => {
+      window.addEventListener(ev, acorda, { passive: true, capture: true });
+    });
+
+    this.relogioLeitura = setInterval(() => {
+      // so conta com a aba visivel e sinal de atividade nos ultimos 60s
+      if (document.visibilityState !== 'visible') return;
+      if (Date.now() - this.ultimaAtividade > 60000) return;
+      this.segundosLidos += 1;
+      while (this.marcosJaEnviados < this.MARCOS.length &&
+             this.segundosLidos >= this.MARCOS[this.marcosJaEnviados][0]) {
+        this.evento(this.MARCOS[this.marcosJaEnviados][1], { pagina: location.pathname });
+        this.marcosJaEnviados += 1;
+      }
+    }, 1000);
+  }
+
+  reiniciaMedicao() {
+    // cada projeto e uma pagina: a contagem recomeca a cada troca de endereco
+    this.segundosLidos = 0;
+    this.marcosJaEnviados = 0;
+    this.ultimaAtividade = Date.now();
   }
 
   // --- Aviso por e-mail nos cases em construcao ---
@@ -1119,6 +1172,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    this.iniciaMedicao();
     this.semMovimento = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     this.initRouter();
     this.logoIntroTimer = setTimeout(() => { this.setState({ logoIntro: false }); }, 3000);
@@ -1276,6 +1330,7 @@ class Component extends DCLogic {
   }
 
   flyToCase(i, e) {
+    this.evento('abriu-projeto', { projeto: this.routeTitles[i] });
     e.preventDefault();
     if (this.flying) return;
     this.flying = true;
@@ -1398,6 +1453,9 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    clearInterval(this.relogioLeitura);
+    if (this.aoInteragir) ['scroll','pointerdown','keydown','wheel','touchstart']
+      .forEach((ev) => window.removeEventListener(ev, this.aoInteragir, { capture: true }));
     if (this.onPopState) window.removeEventListener('popstate', this.onPopState);
     document.removeEventListener('scroll', this.onIsoScroll, true);
     clearInterval(this.isoInitTimer);
@@ -1653,6 +1711,7 @@ class Component extends DCLogic {
       isMeridian: this.state.view === 'case' && !!cases[caseIdx].isMeridian,
       merRef: this.merRef,
       isMB: !!cases[caseIdx].isMB,
+      cliqueLinkedin: () => this.evento('clicou-linkedin'),
       waitFormOn: this.MOSTRAR_AVISO_EMAIL,
       waitEmail: this.state.waitEmail,
       onWaitInput: this.onWaitInput,
@@ -1842,7 +1901,7 @@ class Component extends DCLogic {
         const img = this.heroGridImgRef.current;
         if (img) img.style.transform = 'translate(-8.3%, -14.3%)';
       },
-      toggleRolePanel: (e) => { e.preventDefault(); this.setState(s => ({ rolePanelOpen: !s.rolePanelOpen })); },
+      toggleRolePanel: (e) => { e.preventDefault(); if (!this.state.rolePanelOpen) this.evento('abriu-mais-detalhes', { caso: this.routeTitles[this.state.caseIdx] }); this.setState(s => ({ rolePanelOpen: !s.rolePanelOpen })); },
       rolePanelT: this.state.rolePanelOpen ? 'translateY(0)' : 'translateY(120%)',
       rolePanelOp: this.state.rolePanelOpen ? 1 : 0,
       rolePanelPe: this.state.rolePanelOpen ? 'auto' : 'none',
@@ -1859,7 +1918,7 @@ class Component extends DCLogic {
         const root = this.caseRootRef.current;
         if (root) root.scrollTo({ top: 0, behavior: 'smooth' });
       },
-      goInfo: (e) => { e.preventDefault(); this.setState({ infoOpen: true }); },
+      goInfo: (e) => { e.preventDefault(); this.evento('abriu-painel-mais'); this.setState({ infoOpen: true }); },
       closeInfo: (e) => { e.preventDefault(); this.startCloseInfo(); },
       closeInfoBtn: (e) => { e.preventDefault(); e.stopPropagation(); this.startCloseInfo(); },
       infoW: isMobile ? '100%' : '40rem',
@@ -1901,7 +1960,7 @@ class Component extends DCLogic {
       caseBarShadow: dark ? '0 8px 24px rgba(0,0,0,0.25)' : 'none',
       ringColor: dark ? 'rgba(255,255,255,0.9)' : 'rgba(20,20,20,0.85)',
       knobY: dark ? '0px' : (isMobile ? '16px' : '20px'),
-      toggleTheme: (e) => { e.preventDefault(); this.setState({ theme: dark ? 'light' : 'dark' }); },
+      toggleTheme: (e) => { e.preventDefault(); this.evento('trocou-tema', { para: dark ? 'light' : 'dark' }); this.setState({ theme: dark ? 'light' : 'dark' }); },
       navBtnsOp: (isMobile && this.state.logoIntro) ? 0 : 1,
       cardBasis: isMobile ? '232px' : '380px',
       cardH: isMobile ? '296px' : '480px',
@@ -1931,7 +1990,7 @@ class Component extends DCLogic {
       logoOp: (this.state.logoHover || this.state.logoIntro) ? 1 : 0,
       logoEnter: () => this.setState({ logoHover: true }),
       logoLeave: () => this.setState({ logoHover: false }),
-      toggleLang: (e) => { e.preventDefault(); this.setState({ lang: pt ? 'en' : 'pt' }); }
+      toggleLang: (e) => { e.preventDefault(); this.evento('trocou-idioma', { para: pt ? 'en' : 'pt' }); this.setState({ lang: pt ? 'en' : 'pt' }); }
     };
   }
 }
