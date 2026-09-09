@@ -476,16 +476,17 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </sc-if>
 
     <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
-    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 8rem 1.5rem 4rem; box-sizing: border-box; text-align: center;">
-      <sc-if value="{{ temPreviaEmBreve }}" hint-placeholder-val="{{ false }}">
-      <div style="width: min(62rem, 92vw, 98vh); aspect-ratio: 1280 / 804; border-radius: 1rem; overflow: hidden; background: #101010; box-shadow: 0 1.5rem 3rem -1rem rgba(0,0,0,0.45);">
-        <video preload="none" data-late-src="{{ videoEmBreve }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
-      </div>
-      </sc-if>
+
+    <sc-if value="{{ temPreviaEmBreve }}" hint-placeholder-val="{{ false }}">
+    <!-- com previa: mesma anatomia de um case — faixa do tamanho da capa e texto abaixo -->
+    <div style="height: {{ coverH }}; min-height: {{ coverMinH }}; border-radius: 1rem; overflow: hidden; background: linear-gradient(180deg, #41613E 0%, #527B49 25%, #6DA35A 50%, #537A48 75%, #3F5F38 100%);">
+      <video preload="none" data-late-src="{{ videoEmBreve }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem; padding: 3rem 0 0; text-align: center;">
       <h1 style="font-family: 'Archivo', sans-serif; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; line-height: 1.4; margin: 0; color: {{ th.text }};">{{ t.comingSoonBody }}</h1>
       <sc-if value="{{ waitFormOn }}" hint-placeholder-val="{{ false }}">
       <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
-      <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%; max-width: 30rem;">
+      <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%; max-width: 30rem; margin: 0 auto;">
         <input ref="{{ waitTrapRef }}" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
         <input type="email" name="email" value="{{ waitEmail }}" onchange="{{ onWaitInput }}" placeholder="{{ t.waitPlaceholder }}" aria-label="{{ t.waitLabel }}" autocomplete="email" spellcheck="{{ false }}" style="flex: 1 1 14rem; min-width: 0; max-width: 20rem; height: 2.75rem; box-sizing: border-box; padding: 0 0.875rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; color: {{ th.text }}; background: {{ th.card }}; border: 1px solid {{ waitFieldBorder }}; border-radius: 10px; outline: none; transition: border-color 0.2s ease;">
         <button type="submit" disabled="{{ waitBusy }}" style="height: 2.75rem; padding: 0 1.125rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 500; color: {{ th.bg }}; background: {{ th.knob }}; border: none; border-radius: 10px; cursor: {{ waitBtnCursor }}; opacity: {{ waitBtnOp }}; transition: opacity 0.2s ease; white-space: nowrap;">{{ waitBtnLabel }}</button>
@@ -500,6 +501,31 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       <div style="font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.statement }};">{{ t.waitPrivacy }}</div>
       </sc-if>
     </div>
+    </sc-if>
+
+    <sc-if value="{{ semPreviaEmBreve }}" hint-placeholder-val="{{ true }}">
+    <!-- sem previa: tela unica, sem rolagem -->
+    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 8rem 1.5rem 4rem; box-sizing: border-box; text-align: center;">
+      <h1 style="font-family: 'Archivo', sans-serif; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; line-height: 1.4; margin: 0; color: {{ th.text }};">{{ t.comingSoonBody }}</h1>
+      <sc-if value="{{ waitFormOn }}" hint-placeholder-val="{{ false }}">
+      <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
+      <form onsubmit="{{ submitWait }}" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; width: 100%; max-width: 30rem; margin: 0 auto;">
+        <input ref="{{ waitTrapRef }}" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;">
+        <input type="email" name="email" value="{{ waitEmail }}" onchange="{{ onWaitInput }}" placeholder="{{ t.waitPlaceholder }}" aria-label="{{ t.waitLabel }}" autocomplete="email" spellcheck="{{ false }}" style="flex: 1 1 14rem; min-width: 0; max-width: 20rem; height: 2.75rem; box-sizing: border-box; padding: 0 0.875rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; color: {{ th.text }}; background: {{ th.card }}; border: 1px solid {{ waitFieldBorder }}; border-radius: 10px; outline: none; transition: border-color 0.2s ease;">
+        <button type="submit" disabled="{{ waitBusy }}" style="height: 2.75rem; padding: 0 1.125rem; font-family: 'Archivo', sans-serif; font-size: 0.9375rem; font-weight: 500; color: {{ th.bg }}; background: {{ th.knob }}; border: none; border-radius: 10px; cursor: {{ waitBtnCursor }}; opacity: {{ waitBtnOp }}; transition: opacity 0.2s ease; white-space: nowrap;">{{ waitBtnLabel }}</button>
+      </form>
+      </sc-if>
+      <sc-if value="{{ waitHasMsg }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.text2 }};">{{ waitMsg }}</div>
+      </sc-if>
+      <sc-if value="{{ waitDone }}" hint-placeholder-val="{{ false }}">
+      <div style="font-family: 'Archivo', sans-serif; font-size: 1rem; font-weight: 300; margin: 0; color: {{ th.text }};">{{ t.waitOk }}</div>
+      </sc-if>
+      <div style="font-family: 'Archivo', sans-serif; font-size: 0.8125rem; font-weight: 300; line-height: 1.5; margin: 0; color: {{ th.statement }};">{{ t.waitPrivacy }}</div>
+      </sc-if>
+    </div>
+    </sc-if>
+
     </sc-if>
 
     <sc-if value="{{ isGeneric }}" hint-placeholder-val="{{ true }}">
@@ -1764,8 +1790,11 @@ class Component extends DCLogic {
       // previa em video nos cases em construcao que ja tem algo a mostrar
       videoEmBreve: cases[caseIdx].videoEmBreve || '',
       temPreviaEmBreve: !!cases[caseIdx].videoEmBreve,
+      semPreviaEmBreve: !cases[caseIdx].videoEmBreve,
       glassGradHeader: th.glassGrad,
-      caseOverflowY: cases[caseIdx].comingSoon ? 'hidden' : 'auto',
+      // com previa em video a pagina ganha a anatomia de um case: faixa no
+      // topo e texto abaixo, entao rola. Sem previa segue em tela unica.
+      caseOverflowY: (cases[caseIdx].comingSoon && !cases[caseIdx].videoEmBreve) ? 'hidden' : 'auto',
       isComingSoon: !!cases[caseIdx].comingSoon,
       notComingSoon: !cases[caseIdx].comingSoon,
       isGeneric: !cases[caseIdx].isSanctu && !cases[caseIdx].isMB && !cases[caseIdx].isMeridian && !cases[caseIdx].comingSoon,
