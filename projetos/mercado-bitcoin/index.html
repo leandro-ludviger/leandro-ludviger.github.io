@@ -477,6 +477,11 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
 
     <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
     <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 7rem 1.5rem; box-sizing: border-box; text-align: center;">
+      <sc-if value="{{ temPreviaEmBreve }}" hint-placeholder-val="{{ false }}">
+      <div style="width: min(40rem, 84vw); max-height: 46vh; aspect-ratio: 1280 / 804; border-radius: 1rem; overflow: hidden; background: #101010; box-shadow: 0 1.5rem 3rem -1rem rgba(0,0,0,0.45);">
+        <video preload="none" data-late-src="{{ videoEmBreve }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+      </div>
+      </sc-if>
       <h1 style="font-family: 'Archivo', sans-serif; font-size: 1.125rem; font-weight: 400; letter-spacing: 0; line-height: 1.4; margin: 0; color: {{ th.text }};">{{ t.comingSoonBody }}</h1>
       <sc-if value="{{ waitFormOn }}" hint-placeholder-val="{{ false }}">
       <sc-if value="{{ waitNotDone }}" hint-placeholder-val="{{ true }}">
@@ -1540,6 +1545,8 @@ class Component extends DCLogic {
     const data = [
       { title: 'Sanctu • Monitoring', comingSoon: true, meta: pt ? 'Saúde · 2024' : 'Health · 2024',
         cover: 'linear-gradient(160deg, #DCDCD6, #BFC6BE 55%, #A8B0A8)', coverText: '#5E6A60',
+        coverImage: '/assets/sanctu-monitoring-capa.webp',
+        videoEmBreve: '/assets/sanctu-monitoring-previa.mp4',
         placeholder: '[ capa — Sanctu Monitoring ]',
         tagline: pt ? 'Telemedicina inteira em um único fluxo contínuo.' : 'Telemedicine, end to end, in one continuous flow.',
         services: pt ? 'Produto · Pesquisa' : 'Product · Research',
@@ -1754,6 +1761,9 @@ class Component extends DCLogic {
       // o veu segue o tema. O que passa por baixo varia — ora bloco escuro de
       // midia, ora a pagina — entao nenhum veu fixo combina com tudo. A saida
       // e mante-lo fraco o bastante para ler como bruma, nao como faixa.
+      // previa em video nos cases em construcao que ja tem algo a mostrar
+      videoEmBreve: cases[caseIdx].videoEmBreve || '',
+      temPreviaEmBreve: !!cases[caseIdx].videoEmBreve,
       glassGradHeader: th.glassGrad,
       caseOverflowY: cases[caseIdx].comingSoon ? 'hidden' : 'auto',
       isComingSoon: !!cases[caseIdx].comingSoon,
