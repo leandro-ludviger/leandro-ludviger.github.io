@@ -476,9 +476,9 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </sc-if>
 
     <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}">
-    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 7rem 1.5rem; box-sizing: border-box; text-align: center;">
+    <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; padding: 8rem 1.5rem 4rem; box-sizing: border-box; text-align: center;">
       <sc-if value="{{ temPreviaEmBreve }}" hint-placeholder-val="{{ false }}">
-      <div style="width: min(40rem, 84vw); max-height: 46vh; aspect-ratio: 1280 / 804; border-radius: 1rem; overflow: hidden; background: #101010; box-shadow: 0 1.5rem 3rem -1rem rgba(0,0,0,0.45);">
+      <div style="width: min(62rem, 92vw, 98vh); aspect-ratio: 1280 / 804; border-radius: 1rem; overflow: hidden; background: #101010; box-shadow: 0 1.5rem 3rem -1rem rgba(0,0,0,0.45);">
         <video preload="none" data-late-src="{{ videoEmBreve }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="width: 100%; height: 100%; object-fit: contain; display: block;"></video>
       </div>
       </sc-if>
