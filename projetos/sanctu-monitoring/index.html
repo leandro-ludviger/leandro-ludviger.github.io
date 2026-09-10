@@ -749,21 +749,10 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       </div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
-      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; height: {{ colunaTextoH }};">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; min-height: {{ colunaTextoH }};">
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s4title }}</h2>
         <div style="flex: 1;"></div>
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 1rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h1 }}</h3>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mer.s4b1 }}</p>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 1rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h2 }}</h3>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mer.s4b2 }}</p>
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 1rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h3 }}</h3>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mer.s4b3 }}</p>
-        </div>
+        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mer.s4p1 }}</p>
       </div>
       <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><video preload="none" data-late-src="/assets/meridian/solucao-loop-sm.mp4" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 100%; max-height: 100%; display: block;"></video></div>
     </div>
@@ -772,7 +761,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <div style="padding: 8rem 0 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.impTitle }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mer.impIntro }}</p>
+        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mer.impIntro }}</p>
       </div>
       <div style="border-top: 0.0625rem solid {{ th.divider }}; margin: 6rem 0 0;"></div>
       <div style="display: grid; grid-template-columns: {{ caseCols3 }}; gap: {{ impGap }}; padding: 6rem 0 0;">
@@ -1603,8 +1592,8 @@ class Component extends DCLogic {
         img2: "#191919 url('/assets/meridian/cards.webp') center / contain no-repeat",
         imgFull: "#191919 url('/assets/meridian/send.webp') center / contain no-repeat",
         ficha: pt
-          ? { fk1: 'PAPEL', fv1: 'Lead Product Designer', fk2: 'ANO', fv2: '2026', fk4: 'FOCO', fv4: 'Inteligência financeira · Mobile', fk5: 'PROCESSO', fv5: 'AI Design de ponta a ponta' }
-          : { fk1: 'ROLE', fv1: 'Lead Product Designer', fk2: 'YEAR', fv2: '2026', fk4: 'FOCUS', fv4: 'Financial intelligence · Mobile', fk5: 'PROCESS', fv5: 'End-to-end AI Design' },
+          ? { fk1: 'PAPEL', fv1: 'Lead Product Designer', fk2: 'ANO', fv2: '2026', fk4: 'FOCO', fv4: 'Clareza financeira · Confiança', fk5: 'PROCESSO', fv5: 'AI Design de ponta a ponta' }
+          : { fk1: 'ROLE', fv1: 'Lead Product Designer', fk2: 'YEAR', fv2: '2026', fk4: 'FOCUS', fv4: 'Financial clarity · Trust', fk5: 'PROCESS', fv5: 'End-to-end AI Design' },
         tagline: pt ? 'Um sistema operacional pessoal para o dinheiro.' : 'A personal operating system for money.',
         services: pt ? 'Product design · Protótipo' : 'Product design · Prototype',
         intro: pt ? 'Conceito de banco digital que evolui de "mostre meu saldo" para inteligência financeira: Safe to Spend, previsão de fluxo de caixa e recomendações acionáveis.' : 'A digital banking concept that evolves from "show me my balance" into financial intelligence: Safe to Spend, cash-flow forecasting and actionable recommendations.',
@@ -1797,41 +1786,39 @@ class Component extends DCLogic {
       isGeneric: !cases[caseIdx].isSanctu && !cases[caseIdx].isMB && !cases[caseIdx].isMeridian && !cases[caseIdx].comingSoon,
       mb,
       mer: pt ? {
-        heroIntro: 'Meridian é um conceito de banco digital que evolui de "mostre meu saldo" para inteligência financeira. Em vez de listar transações, o app responde a pergunta que importa: quanto eu posso gastar hoje sem comprometer o mês?\n\nAtuei no projeto de ponta a ponta apoiado por IA — dos princípios de design, passando por pesquisa, criação dos fluxos, interface, animações e copy.',
-        s2title: 'Problema',
-        s2p1: 'Apps de banco são retrovisores: mostram o que você já gastou, não o que pode fazer. O saldo sozinho é um número sem contexto — não desconta contas a vencer, metas de poupança nem o ritmo de gastos do mês.\n\nO resultado é ansiedade financeira: a pessoa consulta o app várias vezes por dia e continua sem saber se pode ou não fazer a próxima compra sem que isso afete seu controle financeiro.\n\nNeobank já é uma realidade, o próximo passo é instruir como podemos cuidar melhor da nossa saúde financeira.',
-        s3title: 'Estratégia',
-        s3p1: 'Substituir o saldo pelo Safe to Spend como métrica central: o que sobra depois de reservar contas, assinaturas e metas. É o número que responde a pergunta real do usuário — e ele abre o app.',
-        s3p2: 'Em volta dele, uma camada de inteligência: previsão de fluxo de caixa mês a mês e insights de gasto por categoria. Cada insight termina em uma ação executável na hora — ajustar um limite, mover dinheiro, pausar uma assinatura.\n\nTudo isso tentando preservar ao máximo o padrão de navegação que as pessoas já estão acostumadas ao utilizarem neobanks, pois era necessário preservar a curva de aprendizado que é bem consolidada.',
-        s4title: 'Solução',
-        s4p1: 'Um app iOS testado com usuários reais, pronto para handoff com inúmeras telas e fluxos: onboarding, home com Safe to Spend, spending insights, cartões (do pedido ao bloqueio), poupança com metas e transferências.',
-        s4p2: 'A identidade visual usa texturas de dither ordenado em movimento — a mesma que anima a capa deste case — sobre uma paleta escura com tintas off-white, violeta e verde.',
-        s4h1: 'Research', s4b1: 'Com o uso de IA sintetizamos pesquisas, relatórios e benchmarks relacionados a usuários de neobank, criando insights de forma ágil sobre uma documentação extensa.',
-        s4h2: 'Testes', s4b2: 'Geramos usuários sintéticos a partir das personas para testarmos hipóteses de fluxos e validar textos. Depois partimos para testes com usuários reais.',
-        s4h3: 'AI Design anti-slop', s4b3: 'Utilizamos a síntese de pesquisa, resultados dos testes, princípios de Design e outras definições como base de contexto. Com isso conseguimos criar bons limites do que a IA poderia ou não propor na interface, permitindo que ela contribuísse na criação de 100% das telas de forma iterativa.',
-        impTitle: 'Validação com usuários',
-        impIntro: 'O protótipo navegável foi testado com 52 usuários — sessões moderadas de usabilidade e testes não moderados — com tarefas que iam do onboarding ao envio de dinheiro.',
-        imp1t: 'Clareza financeira', imp1d: '87% dos participantes responderam corretamente "quanto posso gastar hoje?" em menos de 5 segundos — contra 21% usando o app do próprio banco.',
-        imp2t: 'Insights que viram ação', imp2d: '86% completaram a ação sugerida pelo insight (pausar assinatura, ajustar limite) sem ajuda — tempo médio de 22 segundos.',
-        imp3t: 'Confiança percebida', imp3d: 'Nota média 4,6/5 em "eu confiaria neste app para gerenciar meu dinheiro" — e 79% disseram que trocariam o saldo pelo Safe to Spend.',
+        heroIntro: "Meridian é um conceito de banco digital para o mercado brasileiro que responde à pergunta que o saldo não responde: quanto posso gastar sem comprometer o mês? Liderei o projeto de ponta a ponta, da pesquisa à interface, com IA acelerando cada etapa.",
+        s2title: "Problema",
+        s2p1: "O saldo não desconta o aluguel da semana que vem, a fatura que ainda vai fechar nem o dinheiro reservado para uma meta. Apps de banco mostram o que já foi gasto, não o que ainda pode ser gasto.\n\nO resultado é ansiedade. A pessoa abre o app várias vezes por dia e continua sem saber se a próxima compra cabe no mês. E cada consulta expõe a renda e o celular em lugares onde nenhum dos dois deveria aparecer.\n\nOs neobanks resolveram o acesso ao dinheiro. Falta ajudar as pessoas a decidir o que fazer com ele.",
+        s3title: "Estratégia",
+        s3p1: "Colocar o Safe to Spend no centro das decisões: o que sobra depois de contas, assinaturas e metas. Dividido pelos dias restantes, ele vira um limite diário. Em volta dele, previsão de fluxo de caixa e insights que sempre terminam em uma ação: pausar uma assinatura, ajustar um limite, mover dinheiro.",
+        s3p2: "North star: meses no azul. É o número de clientes que fecham o mês dentro do Safe to Spend, sem rotativo, cheque especial ou atraso. Ao contrário de \"volume de dívida\", essa métrica vale para quem deve e para quem não deve, é medida todo mês e não pune a troca de uma dívida cara por uma mais barata.",
+        s4title: "Solução",
+        s4p1: "O produto cobre a jornada completa (onboarding, insights, cartões, metas e transferências) e preserva a navegação que as pessoas já conhecem dos neobanks, para inovar apenas onde importa.\n\nA decisão mais importante veio dos testes. Com o Safe to Spend no topo da home, as pessoas se assustavam: sabiam que tinham mais dinheiro na conta e interpretavam o número menor como erro. A home passou a mostrar primeiro o saldo e, logo abaixo, dividi-lo em disponível e comprometido. Os resultados melhoraram. O Safe to Spend continua guiando as decisões, agora como parte do saldo, e não no lugar dele.\n\nA IA sintetizou a pesquisa, e usuários sintéticos descartaram fluxos fracos antes dos testes com pessoas reais. A síntese, os resultados e os princípios de design viraram limites para a IA, que contribuiu em 100% das telas sem cair no genérico.",
+        impTitle: "Validação com usuários",
+        impIntro: "Primeiro, 15 sessões moderadas, feitas em rodadas, revelaram o porquê das reações e redesenharam a home. Depois, um teste não moderado com 52 pessoas, incluindo as 15, mediu sucesso, tempo e confiança. Os resultados se mantiveram entre os 37 participantes que viram o protótipo pela primeira vez.\n\nO público testado tinha de 25 a 40 anos, renda de 2 a 6 salários mínimos, dívidas em dia e poupança irregular. Os testes foram feitos em português; as telas do case estão em inglês porque a apresentação foi para um integrante britânico do time.",
+        imp1t: "Clareza financeira",
+        imp1d: "87% (45 de 52) acertaram quanto podiam gastar no mês em até 5 segundos. No app do próprio banco, foram 21%.",
+        imp2t: "Ação imediata",
+        imp2d: "87% (45 de 52) executaram a ação sugerida pelo insight sem ajuda, em 22 segundos. A correção acontece antes da fatura, não depois.",
+        imp3t: "Confiança",
+        imp3d: "A nota média foi 4,6/5 em \"eu confiaria neste app para gerenciar meu dinheiro\", e o SUS ficou em 76,1, acima da média de referência, que é 68. Além disso, 79% trocariam o saldo pelo Safe to Spend, desde que vejam de onde ele sai. Por isso a home começa pelo total.",
       } : {
-        heroIntro: 'Meridian is a digital banking concept that evolves from "show me my balance" into financial intelligence. Instead of listing transactions, the app answers the question that matters: how much can I spend today without compromising the month?\n\nI worked on the project end to end, supported by AI — from design principles through research, flows, interface, animations and copy.',
-        s2title: 'Problem',
-        s2p1: 'Banking apps are rear-view mirrors: they show what you already spent, not what you can do. A balance alone is a number without context — it doesn\'t account for upcoming bills, savings goals or the month\'s spending pace.\n\nThe result is financial anxiety: people check the app several times a day and still don\'t know whether they can make the next purchase without hurting their financial control.\n\nNeobanks are already a reality — the next step is teaching people how to take better care of their financial health.',
-        s3title: 'Strategy',
-        s3p1: 'Replace the balance with Safe to Spend as the core metric: what\'s left after setting aside bills, subscriptions and goals. It\'s the number that answers the user\'s real question — and it opens the app.',
-        s3p2: 'Around it, an intelligence layer: month-by-month cash-flow forecasting and spending insights by category. Every insight ends in an action you can take on the spot — adjust a limit, move money, pause a subscription.\n\nAll of it while preserving, as much as possible, the navigation patterns people already know from neobanks — keeping the well-consolidated learning curve intact.',
-        s4title: 'Solution',
-        s4p1: 'An iOS app tested with real users, ready for handoff with countless screens and flows: onboarding, a Safe to Spend home, spending insights, cards (from ordering to freezing), goal-based savings and transfers.',
-        s4p2: 'The visual identity uses ordered-dither textures in motion — the same one animating this case\'s cover — over a dark palette with off-white, violet and green inks.',
-        s4h1: 'Research', s4b1: 'Using AI, we synthesized research, reports and benchmarks about neobank users, generating insights quickly from an extensive body of documentation.',
-        s4h2: 'Testing', s4b2: 'We generated synthetic users from the personas to test flow hypotheses and validate copy. Then we moved on to tests with real users.',
-        s4h3: 'Anti-slop AI Design', s4b3: 'We used the research synthesis, test results, design principles and other definitions as context. That let us set good boundaries for what AI could or couldn\'t propose in the interface, allowing it to contribute to the creation of 100% of the screens iteratively.',
-        impTitle: 'User validation',
-        impIntro: 'The navigable prototype was tested with 52 users — moderated usability sessions plus unmoderated tests — with tasks ranging from onboarding to sending money.',
-        imp1t: 'Financial clarity', imp1d: '87% of participants correctly answered "how much can I spend today?" in under 5 seconds — versus 21% using their own bank\'s app.',
-        imp2t: 'Insights that become action', imp2d: '86% completed the action suggested by an insight (pause a subscription, adjust a limit) unaided — average time 22 seconds.',
-        imp3t: 'Perceived trust', imp3d: 'Average score of 4.6/5 on "I would trust this app to manage my money" — and 79% said they\'d swap the balance for Safe to Spend.',
+        heroIntro: "Meridian is a digital banking concept for the Brazilian market that answers the question a balance can't: how much can I spend without compromising the month? I led the project end to end, from research to interface, with AI speeding up every stage.",
+        s2title: "Problem",
+        s2p1: "A balance doesn't subtract next week's rent, the card bill that hasn't closed yet or the money set aside for a goal. Banking apps show what has already been spent, not what can still be spent.\n\nThe result is anxiety. People open the app several times a day and still don't know whether the next purchase fits in the month. And every check exposes both their income and their phone in places where neither should be showing.\n\nNeobanks solved access to money. What's missing is helping people decide what to do with it.",
+        s3title: "Strategy",
+        s3p1: "Put Safe to Spend at the center of every decision: what's left after bills, subscriptions and goals. Divided by the days remaining, it becomes a daily limit. Around it, cash-flow forecasting and insights that always end in an action: pause a subscription, adjust a limit, move money.",
+        s3p2: "North star: months in the black. It's the number of customers who close the month within Safe to Spend, with no revolving credit, overdraft or late payments. Unlike \"debt volume\", this metric works for people with and without debt, is measured every month and doesn't penalize swapping expensive debt for cheaper debt.",
+        s4title: "Solution",
+        s4p1: "The product covers the full journey (onboarding, insights, cards, goals and transfers) and keeps the navigation people already know from neobanks, so it innovates only where it matters.\n\nThe most important decision came from testing. With Safe to Spend at the top of the home screen, people got alarmed: they knew they had more money in their account and read the smaller number as an error. The home screen now shows the balance first and, right below it, splits it into available and committed. Results improved. Safe to Spend still guides decisions, now as part of the balance rather than in place of it.\n\nAI synthesized the research, and synthetic users ruled out weak flows before testing with real people. The synthesis, the results and the design principles became boundaries for the AI, which contributed to 100% of the screens without sliding into the generic.",
+        impTitle: "User validation",
+        impIntro: "First, 15 moderated sessions, run in rounds, uncovered why people reacted the way they did and reshaped the home screen. Then an unmoderated test with 52 people, including those 15, measured success, time and trust. The results held among the 37 participants who saw the prototype for the first time.\n\nParticipants were 25 to 40 years old, earned 2 to 6 times the minimum wage, were up to date on their debts and saved irregularly. Tests were run in Portuguese; the case screens are in English because the presentation was for a British member of the team.",
+        imp1t: "Financial clarity",
+        imp1d: "87% (45 of 52) correctly said how much they could spend that month within 5 seconds. With their own bank's app, it was 21%.",
+        imp2t: "Immediate action",
+        imp2d: "87% (45 of 52) carried out the action suggested by an insight unaided, in 22 seconds. The correction happens before the bill, not after.",
+        imp3t: "Trust",
+        imp3d: "The average score was 4.6/5 for \"I would trust this app to manage my money\", and the SUS came in at 76.1, above the benchmark average of 68. On top of that, 79% would swap the balance for Safe to Spend, as long as they can see where it comes from. That's why the home screen starts with the total.",
       },
       ficha: cases[caseIdx].ficha ? cases[caseIdx].ficha : cases[caseIdx].isMB ? mb.ficha : (pt
         ? { fk1: 'PAPEL', fv1: 'Head of Design — projeto executado de ponta a ponta', fk2: 'ANO', fv2: '2025 · 2 meses do discovery à entrega', fk4: 'FOCO', fv4: 'Narrativa · Credibilidade', fk5: 'PROCESSO', fv5: 'Lean Design' }
