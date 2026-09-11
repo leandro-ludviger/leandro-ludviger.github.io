@@ -469,7 +469,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: {{ activeCase.coverText }};">{{ activeCase.placeholder }}</span>
       </sc-if>
       <sc-if value="{{ isMeridian }}" hint-placeholder-val="{{ false }}">
-        <video preload="none" data-late-src="/assets/meridian/pattern-loop-sm.mp4" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block;"></video>
+        <video preload="none" data-late-src="/assets/meridian/abertura-loop.mp4" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block;"></video>
         <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,11,13,0.3) 0%, rgba(10,11,13,0) 35%, rgba(10,11,13,0.45) 100%); pointer-events: none;"></div>
       </sc-if>
     </div>
@@ -734,20 +734,20 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s2title }}</h2>
         {{ merEl.s2 }}
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/problema-home-3.webp" alt="Meridian — home com Seguro para gastar" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #282828;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/problema-home-3.webp" alt="Meridian — home com Seguro para gastar" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s3title }}</h2>
         {{ merEl.s3 }}
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/estrategia-sts.webp" alt="Meridian — Seguro para gastar" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #282828;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/estrategia-sts.webp" alt="Meridian — Seguro para gastar" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 1.25rem; padding: 4.5rem 0;">
-      <div style="border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/five-screens-2.webp" alt="Meridian — telas do app" style="width: 100%; display: block;"></div>
+      <div style="border-radius: 1rem; overflow: hidden; background: #282828; display: flex; align-items: center; justify-content: center;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/five-screens-2.webp" alt="Meridian — telas do app" style="width: 100%; display: block;"></div>
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
-        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/icons-3d.webp" alt="Meridian — ícones 3D" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
-        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/pocket.webp" alt="Meridian — cartão no app, no bolso" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #282828; display: flex; align-items: center; justify-content: center;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/icons-3d.webp" alt="Meridian — ícones 3D" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
+        <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #282828;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/pocket.webp" alt="Meridian — cartão no app, no bolso" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
       </div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0 0;">
@@ -767,6 +767,8 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
           {{ merEl.s4b3 }}
         </div>
       </div>
+      <!-- fundo #1B1B1B = o cinza do proprio video (os outros cards sao #282828),
+           senao o quadro do video aparece como um retangulo mais escuro -->
       <!-- o video ocupa as duas linhas da grade (Solucao e Validacao) e fica
            preso no meio da tela enquanto o texto da esquerda rola; no celular
            a grade vira uma coluna so e ele volta ao fluxo normal -->
@@ -797,7 +799,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         </div>
       </div>
 <div style="display: flex; justify-content: center; padding: 6rem 0 0;">
-        <div style="width: min(40rem, 100%); aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden; background: #191919; position: relative;">
+        <div style="width: min(40rem, 100%); aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden; background: #282828; position: relative;">
           <canvas data-mer-logo="1" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated;"></canvas>
           <span data-mer-logotype="1" style="position: absolute; left: 0; right: 0; top: calc(50% + 5.5rem); text-align: center; font-family: 'Instrument Sans', 'Archivo', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.34em; padding-left: 0.34em; color: #F3F1EC; opacity: 0; min-height: 1.25rem;"></span>
         </div>
@@ -1687,11 +1689,11 @@ class Component extends DCLogic {
         intro: pt ? 'O app deixou de ser uma lista de preços para traders e virou um dashboard de investimentos para qualquer pessoa, numa navegação inteiramente nova.' : 'The app went from a price list for traders to an investment dashboard for anyone, in an entirely new navigation.',
         result: pt ? '+13% de negociações da base inativa no primeiro mês; 41% das negociações vieram das sugestões de investimento.' : '+13% trades from the inactive base in the first month; 41% of trades came from the investment suggestions.' },
       { title: 'Meridian • Financial OS', isMeridian: true, meta: 'Fintech · 2026',
-        cover: '#191919', coverText: '#20E07A',
+        cover: '#232323', coverText: '#20E07A',  // = fundo do video de abertura, para a borda dele nao aparecer
         placeholder: '',
-        img1: "#191919 url('/assets/meridian/insight.webp') center / contain no-repeat",
-        img2: "#191919 url('/assets/meridian/cards.webp') center / contain no-repeat",
-        imgFull: "#191919 url('/assets/meridian/send.webp') center / contain no-repeat",
+        img1: "#282828 url('/assets/meridian/insight.webp') center / contain no-repeat",
+        img2: "#282828 url('/assets/meridian/cards.webp') center / contain no-repeat",
+        imgFull: "#282828 url('/assets/meridian/send.webp') center / contain no-repeat",
         ficha: pt
           ? { fk1: 'PAPEL', fv1: 'Lead Product Designer', fk2: 'ANO', fv2: '2026', fk4: 'FOCO', fv4: 'Clareza financeira · Confiança', fk5: 'PROCESSO', fv5: 'AI Design de ponta a ponta' }
           : { fk1: 'ROLE', fv1: 'Lead Product Designer', fk2: 'YEAR', fv2: '2026', fk4: 'FOCUS', fv4: 'Financial clarity · Trust', fk5: 'PROCESS', fv5: 'End-to-end AI Design' },
