@@ -551,7 +551,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <!-- HERO: título gigante centralizado + intro + CTA -->
     <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 6rem 0.5rem 4rem; max-width: 85rem; margin: 0 auto;">
       <h1 style="font-size: 1.125rem; font-weight: 400; letter-spacing: 0; margin: 0 0 3.5rem; line-height: 1.4; color: {{ th.text }};">{{ activeCase.title }}</h1>
-      <p style="font-size: 1.125rem; line-height: 1.55; font-weight: 300; margin: 0 0 3.5rem; max-width: 47.5rem; color: {{ th.subtext }};">{{ sanctu.heroIntro }}</p>
+      <p style="font-size: 0.875rem; line-height: 1.55; font-weight: 300; margin: 0 0 3.5rem; max-width: 47.5rem; color: {{ th.subtext }};">{{ sanctu.heroIntro }}</p>
       <a href="{{ sanctu.siteUrl }}" target="_blank" rel="noopener noreferrer" style="font-size: {{ btnFs }}; color: {{ th.text }}; background: {{ th.panel }}; backdrop-filter: blur(22px) saturate(1.6); -webkit-backdrop-filter: blur(22px) saturate(1.6); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.07); border-radius: 10px; padding: {{ btnPadX }}; height: {{ btnH }}; box-sizing: border-box; display: inline-flex; align-items: center;">{{ sanctu.visitSite }}</a>
     </div>
 
@@ -562,8 +562,8 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.s2title }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s2p1 }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.s2title }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s2p1 }}</p>
       </div>
       <div data-problem-card="1" style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6; position: relative;">
         <sc-if value="{{ problemPhone }}" hint-placeholder-val="{{ false }}">
@@ -576,19 +576,19 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.s3title }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p1 }}</p>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p2 }}</p>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p3 }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.s3title }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p1 }}</p>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p2 }}</p>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s3p3 }}</p>
       </div>
       <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #fdfef6; display: flex; align-items: center; justify-content: center;"><video preload="none" key="{{ strategyVideo }}" data-late-src="{{ strategyVideo }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 92%; max-height: 92%; display: block;"></video></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: {{ s4Pad }};">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.s4title }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p1 }}</p>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p2 }}</p>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p3 }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.s4title }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p1 }}</p>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p2 }}</p>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.s4p3 }}</p>
       </div>
       <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FDFEF6; display: flex; align-items: center; justify-content: center;"><sc-if value="{{ solutionImg }}" hint-placeholder-val="{{ false }}"><img loading="lazy" decoding="async" data-late-src="{{ solutionImg }}" alt="Site da Sanctu aberto em um laptop — seção de produtos" style="width: 100%; height: 100%; display: block; object-fit: cover;"></sc-if></div>
     </div>
@@ -602,23 +602,23 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <!-- FOOTER: Impacto -->
     <div style="padding: 8rem 0 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.impTitle }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.impIntro }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ sanctu.impTitle }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ sanctu.impIntro }}</p>
       </div>
       <div style="border-top: 0.0625rem solid {{ th.divider }}; margin: 6rem 0 0;"></div>
       <div style="display: grid; grid-template-columns: {{ caseCols3 }}; gap: {{ impGap }}; padding: 6rem 0 0;">
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ sanctu.imp1t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ sanctu.imp1d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ sanctu.imp1t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ sanctu.imp1d }}</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ sanctu.imp2t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ sanctu.imp2d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ sanctu.imp2t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ sanctu.imp2d }}</p>
           <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; opacity: 0.7; max-width: 26.25rem;">{{ sanctu.imp2note }}</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ sanctu.imp3t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ sanctu.imp3d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ sanctu.imp3t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ sanctu.imp3d }}</p>
         </div>
       </div>
       <div style="display: flex; justify-content: center; padding: 6rem 0 0;">
@@ -631,22 +631,22 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <!-- HERO: título + intro + meta -->
     <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 6rem 0.5rem 4rem; max-width: 85rem; margin: 0 auto;">
       <h1 style="font-size: 1.125rem; font-weight: 400; letter-spacing: 0; margin: 0 0 3.5rem; line-height: 1.4; color: {{ th.text }};">{{ activeCase.title }}</h1>
-      <p style="font-size: 1.125rem; line-height: 1.55; font-weight: 300; margin: 0 0 3.5rem; max-width: 47.5rem; color: {{ th.subtext }}; white-space: pre-line;">{{ mb.heroIntro }}</p>
+      <p style="font-size: 0.875rem; line-height: 1.55; font-weight: 300; margin: 0 0 3.5rem; max-width: 47.5rem; color: {{ th.subtext }}; white-space: pre-line;">{{ mb.heroIntro }}</p>
     </div>
 
     <!-- SEÇÕES: Problema → Estratégia → Solução → Meu papel -->
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.s2title }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mb.s2p1 }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.s2title }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mb.s2p1 }}</p>
       </div>
       <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden;"><img loading="lazy" decoding="async" src="/assets/mb/opt/problema-app-antigo-2.webp" alt="App antigo do Mercado Bitcoin" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.s3title }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mb.s3p1 }}</p>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s3p2 }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.s3title }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem; white-space: pre-line;">{{ mb.s3p1 }}</p>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s3p2 }}</p>
       </div>
       <div style="display: flex; flex-direction: column; gap: 1rem;">
         <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #FF593D; position: relative;">
@@ -682,10 +682,10 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.s4title }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p1 }}</p>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p2 }}</p>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p3 }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.s4title }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p1 }}</p>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p2 }}</p>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.s4p3 }}</p>
       </div>
       <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden;"><img loading="lazy" decoding="async" src="/assets/mb/opt/home-screens.webp" alt="Nova home — dashboard do investidor" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
@@ -693,22 +693,22 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <!-- FOOTER: Impacto -->
     <div style="padding: 8rem 0 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.impTitle }}</h2>
-        <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.impIntro }}</p>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mb.impTitle }}</h2>
+        <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 40rem;">{{ mb.impIntro }}</p>
       </div>
       <div style="border-top: 0.0625rem solid {{ th.divider }}; margin: 6rem 0 0;"></div>
       <div style="display: grid; grid-template-columns: {{ caseCols3 }}; gap: {{ impGap }}; padding: 6rem 0 0;">
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mb.imp1t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mb.imp1d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mb.imp1t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mb.imp1d }}</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mb.imp2t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mb.imp2d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mb.imp2t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mb.imp2d }}</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mb.imp3t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mb.imp3d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mb.imp3t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mb.imp3d }}</p>
         </div>
       </div>
       <div style="display: flex; justify-content: center; padding: 6rem 0 0;">
@@ -722,20 +722,20 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     <!-- HERO: título + intro -->
     <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 6rem 0.5rem 4rem; max-width: 85rem; margin: 0 auto;">
       <h1 style="font-size: 1.125rem; font-weight: 400; letter-spacing: 0; margin: 0 0 3.5rem; line-height: 1.4; color: {{ th.text }};">{{ activeCase.title }}</h1>
-      <p style="font-size: 1.125rem; line-height: 1.55; font-weight: 300; margin: 0 0 3.5rem; max-width: 47.5rem; color: {{ th.subtext }}; white-space: pre-line;">{{ mer.heroIntro }}</p>
+      <p style="font-size: 0.875rem; line-height: 1.55; font-weight: 300; margin: 0 0 3.5rem; max-width: 47.5rem; color: {{ th.subtext }}; white-space: pre-line;">{{ mer.heroIntro }}</p>
     </div>
 
     <!-- SEÇÕES: Problema → Estratégia → Solução -->
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s2title }}</h2>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s2title }}</h2>
         {{ merEl.s2 }}
       </div>
       <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #262626;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/problema-home-3.webp" alt="Meridian — home com Seguro para gastar" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s3title }}</h2>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s3title }}</h2>
         {{ merEl.s3 }}
       </div>
       <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #262626;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/estrategia-sts.webp" alt="Meridian — Seguro para gastar" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
@@ -749,18 +749,18 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
     </div>
     <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; min-height: {{ colunaTextoH }};">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s4title }}</h2>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s4title }}</h2>
         <div style="flex: 1;"></div>
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 1rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h1 }}</h3>
+          <h3 style="font-size: 0.875rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h1 }}</h3>
           {{ merEl.s4b1 }}
         </div>
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 1rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h2 }}</h3>
+          <h3 style="font-size: 0.875rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h2 }}</h3>
           {{ merEl.s4b2 }}
         </div>
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <h3 style="font-size: 1rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h3 }}</h3>
+          <h3 style="font-size: 0.875rem; font-weight: 200; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3; color: {{ th.text }};">{{ mer.s4h3 }}</h3>
           {{ merEl.s4b3 }}
         </div>
       </div>
@@ -774,7 +774,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       <!-- min-height da altura do video: sem isso a grade acaba antes e o video
            sobe junto com o titulo da Validacao em vez de ficar ao lado dele -->
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; margin: 8rem 0 0; min-height: {{ colunaTextoH }};">
-        <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.impTitle }}</h2>
+        <h2 style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.impTitle }}</h2>
         {{ merEl.impIntro }}
       </div>
     </div>
@@ -784,16 +784,16 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
       <div style="border-top: 0.0625rem solid {{ th.divider }}; margin: 6rem 0 0;"></div>
       <div style="display: grid; grid-template-columns: {{ caseCols3 }}; gap: {{ impGap }}; padding: 6rem 0 0;">
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mer.imp1t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mer.imp1d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mer.imp1t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mer.imp1d }}</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mer.imp2t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mer.imp2d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mer.imp2t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mer.imp2d }}</p>
         </div>
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
-          <div style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mer.imp3t }}</div>
-          <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mer.imp3d }}</p>
+          <div style="font-size: 1rem; font-weight: 400; letter-spacing: -0.0125rem; line-height: 1.3;">{{ mer.imp3t }}</div>
+          <p style="font-size: 0.875rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mer.imp3d }}</p>
         </div>
       </div>
 <div style="display: flex; justify-content: center; padding: 6rem 0 0;">
@@ -1888,7 +1888,7 @@ class Component extends DCLogic {
       mb,
       mer: merTxt,
       merEl: (() => {
-        const P = { fontSize: '1.125rem', fontWeight: 300, lineHeight: 1.55, margin: 0, color: th.subtext, maxWidth: '40rem' };
+        const P = { fontSize: '0.875rem', fontWeight: 300, lineHeight: 1.55, margin: 0, color: th.subtext, maxWidth: '40rem' };
         // link na cor de texto principal: preto no tema claro, quase branco no
         // escuro — preto fixo sumiria sobre o fundo #0A0A09
         const r = (tx) => this.rich(tx, P, th.text);
