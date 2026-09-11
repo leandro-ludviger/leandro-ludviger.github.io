@@ -750,7 +750,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
         <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919;"><img loading="lazy" decoding="async" src="/assets/meridian/opt/pocket.webp" alt="Meridian — cartão no app, no bolso" style="width: 100%; height: 100%; object-fit: cover; display: block;"></div>
       </div>
     </div>
-    <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0;">
+    <div style="display: grid; grid-template-columns: {{ caseCols }}; gap: 1.25rem; padding: 4.5rem 0 0;">
       <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; min-height: {{ colunaTextoH }};">
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.s4title }}</h2>
         {{ merEl.s4intro }}
@@ -768,15 +768,20 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
           {{ merEl.s4b3 }}
         </div>
       </div>
-      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center;"><video preload="none" data-late-src="/assets/meridian/solucao-loop-sm.mp4" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 100%; max-height: 100%; display: block;"></video></div>
-    </div>
-
-    <!-- FOOTER: Destaques -->
-    <div style="padding: 8rem 0 0;">
-      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
+      <!-- o video ocupa as duas linhas da grade (Solucao e Validacao) e fica
+           preso no meio da tela enquanto o texto da esquerda rola; no celular
+           a grade vira uma coluna so e ele volta ao fluxo normal -->
+      <div style="height: {{ mediaH }}; border-radius: 1rem; overflow: hidden; background: #191919; display: flex; align-items: center; justify-content: center; position: {{ solVidPos }}; top: max(7rem, 16vh); align-self: start; grid-column: {{ solVidCol }}; grid-row: {{ solVidRow }};"><video preload="none" data-late-src="/assets/meridian/solucao-loop-sm.mp4" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" style="max-width: 100%; max-height: 100%; display: block;"></video></div>
+      <!-- min-height da altura do video: sem isso a grade acaba antes e o video
+           sobe junto com o titulo da Validacao em vez de ficar ao lado dele -->
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem; margin: 8rem 0 0; min-height: {{ colunaTextoH }};">
         <h2 style="font-size: 1.0625rem; font-weight: 400; letter-spacing: -0.0125rem; margin: 0; line-height: 1.3;">{{ mer.impTitle }}</h2>
         {{ merEl.impIntro }}
       </div>
+    </div>
+
+    <!-- FOOTER: Destaques -->
+    <div>
       <div style="border-top: 0.0625rem solid {{ th.divider }}; margin: 6rem 0 0;"></div>
       <div style="display: grid; grid-template-columns: {{ caseCols3 }}; gap: {{ impGap }}; padding: 6rem 0 0;">
         <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 3rem;">
@@ -792,8 +797,7 @@ window.MERIDIAN_SYMBOL = { w: 494, h: 348, cells: "386,15,6,6,0.56;108,17,5,5,0.
           <p style="font-size: 1.125rem; font-weight: 300; line-height: 1.55; margin: 0; color: {{ th.subtext }}; max-width: 26.25rem;">{{ mer.imp3d }}</p>
         </div>
       </div>
-      <div style="padding: 6rem 0 0;">{{ merEl.impFecho }}</div>
-      <div style="display: flex; justify-content: center; padding: 6rem 0 0;">
+<div style="display: flex; justify-content: center; padding: 6rem 0 0;">
         <div style="width: min(40rem, 100%); aspect-ratio: 1 / 1; border-radius: 1rem; overflow: hidden; background: #191919; position: relative;">
           <canvas data-mer-logo="1" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block; image-rendering: pixelated;"></canvas>
           <span data-mer-logotype="1" style="position: absolute; left: 0; right: 0; top: calc(50% + 5.5rem); text-align: center; font-family: 'Instrument Sans', 'Archivo', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.34em; padding-left: 0.34em; color: #F3F1EC; opacity: 0; min-height: 1.25rem;"></span>
@@ -1580,7 +1584,7 @@ class Component extends DCLogic {
     const merTxt = pt ? {
       heroIntro: "Meridian é um novo conceito de banco digital para o mercado brasileiro que responde à pergunta que o saldo não responde: quanto posso gastar ou investir sem comprometer o mês? Atuei no projeto de ponta a ponta, da pesquisa até a interface, com IA acelerando cada etapa.",
       s2title: "Problema",
-      s2: "Os apps de banco funcionam como retrovisores: mostram com precisão o que já foi gasto, mas não dizem o que ainda pode ser gasto. O saldo é um número sem contexto. Ele não desconta o aluguel da semana que vem, a fatura que ainda vai fechar, as parcelas de compras antigas nem o dinheiro reservado para uma meta.\n\nNo Brasil, esse ponto cego pesa mais. Com o parcelamento, parte da renda dos próximos meses já fica comprometida no momento da compra, e o cartão de crédito aparece em 85% das famílias endividadas, segundo a [CNC](https://agenciabrasil.ebc.com.br/economia/noticia/2026-08/cnc-endividamento-das-familias-sobe-para-82-mas-inadimplencia-cai). Quando a conta não fecha, a saída costuma ser o rotativo ou o cheque especial. Os juros do rotativo passam de 400% ao ano, segundo o [Banco Central](https://agenciabrasil.ebc.com.br/economia/noticia/2026-03/juros-do-cartao-de-credito-pesam-mais-para-familias-em-fevereiro).\n\nGanhar mais também não resolve. No início de 2026, o endividamento cresceu principalmente entre as famílias com renda acima de cinco salários mínimos, que recorrem ao crédito para manter o padrão de vida, segundo a [CNC](https://portaldocomercio.org.br/economia/cnc-endividamento-das-familias-bate-novo-recorde-historico-em-fevereiro/). O custo de vida sobe junto com a renda, as parcelas se acumulam e o mês termina sem que a pessoa saiba para onde o dinheiro foi. O resultado é ansiedade: ela abre o app diversas vezes, faz contas e continua sem saber se a próxima compra cabe no mês.\n\nOs neobanks resolveram o acesso ao dinheiro. O próximo passo é ajudar as pessoas a decidir o que fazer com ele.",
+      s2: "Os apps de banco funcionam como retrovisores: mostram com precisão o que já foi gasto, mas não dizem o que ainda pode ser gasto. O saldo é um número sem contexto. Ele não desconta o aluguel da semana que vem, a fatura que ainda vai fechar, as parcelas de compras antigas nem o dinheiro reservado para uma meta.\n\nNo Brasil, esse ponto cego pesa mais. Com o parcelamento, parte da renda dos próximos meses já fica comprometida no momento da compra, e o cartão de crédito aparece em 85% das famílias endividadas, segundo a [CNC](https://agenciabrasil.ebc.com.br/economia/noticia/2026-08/cnc-endividamento-das-familias-sobe-para-82-mas-inadimplencia-cai). Quando a conta não fecha, a saída costuma ser o rotativo ou o cheque especial. Os juros do rotativo passam de 400% ao ano, segundo o [Banco Central](https://agenciabrasil.ebc.com.br/economia/noticia/2026-03/juros-do-cartao-de-credito-pesam-mais-para-familias-em-fevereiro).\n\nGanhar mais também não resolve. No início de 2026, o endividamento cresceu principalmente entre as famílias com renda acima de cinco salários mínimos, que recorrem ao crédito para manter o padrão de vida, segundo a [CNC](https://portaldocomercio.org.br/economia/cnc-endividamento-das-familias-bate-novo-recorde-historico-em-fevereiro/). O custo de vida sobe junto com a renda, as parcelas se acumulam e o mês termina sem que a pessoa saiba para onde o dinheiro foi.",
       s3title: "Estratégia",
       s3: "Mudar a referência das decisões: sai o saldo, entra o Seguro para gastar. É o que sobra depois de contas, assinaturas e metas. O que não for gasto pode seguir para a reserva de emergência, para investimentos ou para gastos não planejados. Em volta dele, previsão de fluxo de caixa e insights que sempre terminam em uma ação: pausar uma assinatura, ajustar um limite, mover dinheiro.\n\nEssa também é uma escolha de negócio. O cliente que se endivida sem controle gera muita receita no curto prazo, mas também concentra o risco de inadimplência. A lucratividade sustentável vem de relacionamentos longos: clientes que sentem que o banco cuida da sua saúde financeira são mais leais e têm cinco vezes mais interesse em contratar outros produtos, segundo a [Financial Health Network](https://finhealthnetwork.org/assessing-customer-financial-health-goes-beyond-product-offerings/).\n\nNorth star: meses no azul. É o número de clientes que fecham o mês dentro do Seguro para gastar, sem rotativo, cheque especial ou atraso. Ao contrário de \"volume de dívida\", essa métrica vale para quem deve e para quem não deve, é medida todo mês e reconhece como avanço trocar uma dívida cara por uma mais barata, mesmo quando o valor devido continua o mesmo.",
       s4title: "Solução",
@@ -1599,11 +1603,10 @@ class Component extends DCLogic {
       imp2d: "87% (45 de 52) executaram a ação sugerida pelo insight sem ajuda, em 22 segundos. É assim que um mês apertado deixa de virar rotativo: a correção acontece quando o problema aparece, e não depois.",
       imp3t: "3. Confiar no número",
       imp3d: "A nota média foi 4,6/5 em \"eu confiaria neste app para gerenciar meu dinheiro\", e o SUS ficou em 76,1, acima da média de referência de 68. Além disso, 79% trocariam o saldo pelo Seguro para gastar, desde que vejam de onde ele sai. Um número em que ninguém confia não orienta decisão nenhuma.",
-      impFecho: "Juntos, os três resultados mostram que as condições para a north star estão presentes. O que ainda precisa ser provado é a relação de causa: se quem sabe, age e confia fecha mais meses no azul. Esse é o próximo passo, com um piloto usando dados reais via Open Finance e um grupo de controle.",
     } : {
       heroIntro: "Meridian is a new digital banking concept for the Brazilian market that answers the question a balance can't: how much can I spend or invest without compromising the month? I worked on the project end to end, from research to interface, with AI speeding up every stage.",
       s2title: "Problem",
-      s2: "Banking apps work like rear-view mirrors: they show precisely what has already been spent, but not what can still be spent. The balance is a number without context. It doesn't subtract next week's rent, the card bill that hasn't closed yet, installments from past purchases or the money set aside for a goal.\n\nIn Brazil, this blind spot weighs more. With installment plans, part of the coming months' income is already committed at the moment of purchase, and credit cards show up in 85% of indebted households, according to [CNC](https://agenciabrasil.ebc.com.br/economia/noticia/2026-08/cnc-endividamento-das-familias-sobe-para-82-mas-inadimplencia-cai). When the numbers don't add up, the usual way out is revolving credit or an overdraft. Revolving credit interest exceeds 400% a year, according to the [Central Bank of Brazil](https://agenciabrasil.ebc.com.br/economia/noticia/2026-03/juros-do-cartao-de-credito-pesam-mais-para-familias-em-fevereiro).\n\nEarning more doesn't solve it either. In early 2026, debt grew mainly among households earning more than five times the minimum wage, who turn to credit to keep up their standard of living, according to [CNC](https://portaldocomercio.org.br/economia/cnc-endividamento-das-familias-bate-novo-recorde-historico-em-fevereiro/). The cost of living rises along with income, installments pile up and the month ends without people knowing where the money went. The result is anxiety: they open the app over and over, do the math and still don't know whether the next purchase fits in the month.\n\nNeobanks solved access to money. The next step is helping people decide what to do with it.",
+      s2: "Banking apps work like rear-view mirrors: they show precisely what has already been spent, but not what can still be spent. The balance is a number without context. It doesn't subtract next week's rent, the card bill that hasn't closed yet, installments from past purchases or the money set aside for a goal.\n\nIn Brazil, this blind spot weighs more. With installment plans, part of the coming months' income is already committed at the moment of purchase, and credit cards show up in 85% of indebted households, according to [CNC](https://agenciabrasil.ebc.com.br/economia/noticia/2026-08/cnc-endividamento-das-familias-sobe-para-82-mas-inadimplencia-cai). When the numbers don't add up, the usual way out is revolving credit or an overdraft. Revolving credit interest exceeds 400% a year, according to the [Central Bank of Brazil](https://agenciabrasil.ebc.com.br/economia/noticia/2026-03/juros-do-cartao-de-credito-pesam-mais-para-familias-em-fevereiro).\n\nEarning more doesn't solve it either. In early 2026, debt grew mainly among households earning more than five times the minimum wage, who turn to credit to keep up their standard of living, according to [CNC](https://portaldocomercio.org.br/economia/cnc-endividamento-das-familias-bate-novo-recorde-historico-em-fevereiro/). The cost of living rises along with income, installments pile up and the month ends without people knowing where the money went.",
       s3title: "Strategy",
       s3: "Change the reference point for decisions: out goes the balance, in comes Safe to Spend. It's what's left after bills, subscriptions and goals. Whatever isn't spent can go to an emergency fund, to investments or to unplanned expenses. Around it, cash-flow forecasting and insights that always end in an action: pause a subscription, adjust a limit, move money.\n\nThis is also a business choice. Customers who fall into debt without control generate a lot of revenue in the short term, but they also concentrate default risk. Sustainable profitability comes from long relationships: customers who feel their bank looks after their financial health are more loyal and five times more interested in taking up other products, according to the [Financial Health Network](https://finhealthnetwork.org/assessing-customer-financial-health-goes-beyond-product-offerings/).\n\nNorth star: months in the black. It's the number of customers who close the month within Safe to Spend, with no revolving credit, overdraft or late payments. Unlike \"debt volume\", this metric works for people with and without debt, is measured every month and counts swapping expensive debt for cheaper debt as progress, even when the amount owed stays the same.",
       s4title: "Solution",
@@ -1622,7 +1625,6 @@ class Component extends DCLogic {
       imp2d: "87% (45 of 52) carried out the action suggested by an insight unaided, in 22 seconds. That's how a tight month stops turning into revolving credit: the correction happens when the problem shows up, not after.",
       imp3t: "3. Trusting the number",
       imp3d: "The average score was 4.6/5 for \"I would trust this app to manage my money\", and the SUS came in at 76.1, above the benchmark average of 68. On top of that, 79% would swap the balance for Safe to Spend, as long as they can see where it comes from. A number nobody trusts doesn't guide any decision.",
-      impFecho: "Together, the three results show that the conditions for the north star are in place. What still needs proving is causation: whether people who know, act and trust close more months in the black. That's the next step, with a pilot using real data via Open Finance and a control group.",
     };
 
     const t = pt ? {
@@ -1892,7 +1894,7 @@ class Component extends DCLogic {
         const r = (tx) => this.rich(tx, P, th.text);
         return { s2: r(merTxt.s2), s3: r(merTxt.s3), s4intro: r(merTxt.s4intro),
                  s4b1: r(merTxt.s4b1), s4b2: r(merTxt.s4b2), s4b3: r(merTxt.s4b3),
-                 impIntro: r(merTxt.impIntro), impFecho: r(merTxt.impFecho) };
+                 impIntro: r(merTxt.impIntro) };
       })(),
       ficha: cases[caseIdx].ficha ? cases[caseIdx].ficha : cases[caseIdx].isMB ? mb.ficha : (pt
         ? { fk1: 'PAPEL', fv1: 'Head of Design — projeto executado de ponta a ponta', fk2: 'ANO', fv2: '2025 · 2 meses do discovery à entrega', fk4: 'FOCO', fv4: 'Narrativa · Credibilidade', fk5: 'PROCESSO', fv5: 'Lean Design' }
@@ -2092,6 +2094,9 @@ class Component extends DCLogic {
       caseTitleSize: isMobile ? '2rem' : '4rem',
       caseTitleSpacing: isMobile ? '-0.0625rem' : '-0.1563rem',
       mediaH: isMobile ? '58vw' : '68vh',
+      solVidPos: isMobile ? 'static' : 'sticky',
+      solVidCol: isMobile ? 'auto' : '2',
+      solVidRow: isMobile ? 'auto' : '1 / span 2',
       // no celular a coluna de texto nao pode herdar a altura da midia:
       // 58vw nao cabe um titulo e tres paragrafos, e o texto transbordava
       colunaTextoH: isMobile ? 'auto' : '68vh',
