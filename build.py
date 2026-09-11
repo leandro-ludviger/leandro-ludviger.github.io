@@ -58,9 +58,9 @@ PROJETOS = [
     {
         "slug": "meridian",
         "titulo": "Meridian · Financial OS",
-        "desc": "Conceito de banco digital que evolui de “mostre meu saldo” para "
-                "inteligência financeira: Safe to Spend, previsão de fluxo de caixa "
-                "e recomendações acionáveis.",
+        "desc": "Conceito de banco digital para o mercado brasileiro que responde "
+                "à pergunta que o saldo não responde: quanto posso gastar ou "
+                "investir sem comprometer o mês?",
         "og": "/assets/og/meridian.jpg",
         "em_breve": False,
     },
